@@ -1,0 +1,40 @@
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "T"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Control|Shift"
+
+[colors.primary]
+background = "0x1e1e2e"
+foreground = "0xf2e9e1"
+
+[window]
+padding.x = 4
+padding.y = 5
+decorations = "Buttonless"
+blur = true
+startup_mode = "SimpleFullscreen" # Other options: "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
+option_as_alt = "Both"
+
+[font]
+normal.family = "FiraCode Nerd Font" # Other options: "JetBrains Mono Nerd Font", "MesloLG Nerd Font"
+size = 11
+
