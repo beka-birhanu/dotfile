@@ -7,18 +7,47 @@ local M = {
 
 function M.config()
   local servers = {
+    -- Lua
     "lua_ls",
+    "stylua",
+
+    -- Shell/Bash
     "bashls",
+
+    -- TypeScript/JavaScript
     "ts_ls",
-    "pyright",
+    "prettierd",
+    "eslint_d",
+    "tailwindcss",
     "html",
     "cssls",
-    "tailwindcss",
     "emmet_ls",
+
+    -- Python
+    "pyright",
+    "autopep8",
+    "ruff",
+
+    -- Go
+    "gopls",
+    "goimports",
+    "golangcilint",
+
+    -- Docker
     "dockerls",
-    "prismals",
     "docker_compose_language_service",
+
+    -- Prisma
+    "prismals",
+
+    -- C#
+    "csharpier",
+    "Roslyn Analyzers",
+
+    -- Miscellaneous
+    "biome",
   }
+
 
   require("mason").setup({
     ui = {
