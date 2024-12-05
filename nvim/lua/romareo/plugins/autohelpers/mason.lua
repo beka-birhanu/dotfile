@@ -31,7 +31,7 @@ function M.config()
     -- Go
     "gopls",
     "goimports",
-    "golangcilint",
+    "golangci-lint",
 
     -- Docker
     "dockerls",
