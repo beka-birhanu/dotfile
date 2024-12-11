@@ -22,6 +22,12 @@ HISTSIZE=1000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 setopt append_history share_history hist_ignore_space hist_ignore_dups
+function zshaddhistory() {
+    emulate -L zsh
+    if [[ $1 = *"ghotp"* ]] ; then
+        return 1
+    fi
+}
 
 # Aliases
 alias ls='ls --color=auto'
@@ -29,11 +35,13 @@ alias la='ls -a --color=auto'
 alias nv='nvim'
 alias fnv='nvim $(fzf --preview "cat {}")'
 alias src='source ~/.zshrc'
-alias go-m='cd ~/Desktop/mereb/'
+alias go-m='cd ~/Documents/mereb/'
 alias go-mc-nv='go-m && cd mereb-ats-client && nv'
 alias go-ma-nv='go-m && cd mereb-ats-api && nv'
-alias go-cd='cd ~/Desktop/class_2024/dist/'
+alias go-cd='cd ~/Documents/class_2024/dist/'
 alias go-cd-nv='go-cd && nv'
+alias go-v='cd ~/Documents/vinom/'
+alias go-v-nv='go-v && nv'
 
 
 # Environment Variables
@@ -91,6 +99,104 @@ function io {
 
 # OTP for github
 function ghotp {
+  if [ -z "$1" ]; then
+      echo "Usage: ghotp <secret>"
+      return 1
+  fi
   oathtool --totp -b "$1"
 }
 
+
+
+# Function to set up a new servlet project
+setup_servlet_project() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+      echo "Usage: setup_servlet_project <project_name> <project_id>"
+      return 1
+  fi
+
+  local PROJECT_NAME=$1
+  local PROJECT_ID=$2
+  local PROJECT_DIR="./$PROJECT_NAME"
+  local WEB_XML="$PROJECT_DIR/WEB-INF/web.xml"
+
+  # Use $PROJECT_NAME and $PROJECT_ID as needed
+  echo "Setting up project: $PROJECT_NAME with ID: $PROJECT_ID"
+
+  # Create directory structure using Maven archetype
+  echo "Creating project directory structure for $PROJECT_NAME..."
+  mvn archetype:generate -DgroupId=com.example -DartifactId=$PROJECT_NAME -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+  # Move into the created project directory
+  cd "$PROJECT_DIR" || { echo "Failed to enter directory $PROJECT_DIR"; return 1; }
+
+  # Initialize git repository
+  git init
+
+  # Create Makefile
+  touch Makefile
+  cat > Makefile <<EOF
+TARGET_DIR := target
+WAR_NAME := $PROJECT_NAME-1.0-SNAPSHOT.war
+
+.PHONY: build run test clean deploy
+
+build:
+	@mvn clean package
+
+run:
+	@mvn tomcat7:run
+
+test:
+	@mvn test
+
+clean:
+	@mvn clean
+EOF
+
+  echo "Project $PROJECT_NAME created at $PROJECT_DIR."
+  echo "Don't forget to add Tomcat 7 plugin to your pom.xml"
+  
+  # Display the Tomcat 7 plugin snippet for pom.xml
+  echo "Paste this into your pom.xml:"
+  cat <<'EOF'
+    <plugins>
+        <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+        </plugin>
+    </plugins>
+EOF
+}
+
+setup_go() {
+  if [ -z "$1" ]; then
+    echo "Usage: setup_go <project_name>"
+    return 1
+  fi
+
+  PROJECT_NAME="$1"
+  echo "Creating Go project with name $PROJECT_NAME"
+
+  mkdir "$PROJECT_NAME" || { echo "Failed to create directory"; return 1; }
+  cd "$PROJECT_NAME" || { echo "Failed to enter directory"; return 1; }
+
+  go mod init "github.com/beka-birhanu/$PROJECT_NAME"
+
+  git init
+
+  touch Makefile
+  cat > Makefile <<EOF
+build:
+	@go build -o ./bin/$PROJECT_NAME ./main.go
+
+test:
+	go test -v ./...
+
+run: build
+	@./bin/$PROJECT_NAME
+EOF
+
+  echo "Your project is all set up with git, a Makefile containing basic commands, and Go modules initialized."
+}
