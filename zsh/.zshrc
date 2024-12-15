@@ -198,5 +198,13 @@ run: build
 	@./bin/$PROJECT_NAME
 EOF
 
+  touch .gitignore
+  cat > .gitignore <<EOF
+bin
+.env
+tmp
+EOF
+
+
   echo "Your project is all set up with git, a Makefile containing basic commands, and Go modules initialized."
 }
