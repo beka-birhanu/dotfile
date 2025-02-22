@@ -42,6 +42,7 @@ alias go-cd='cd ~/Documents/class_2024/dist/'
 alias go-cd-nv='go-cd && nv'
 alias go-v='cd ~/Documents/vinom/'
 alias go-v-nv='go-v && nv'
+alias sysup='sudo pacman -Syu && yay -Syu'
 
 
 # Environment Variables
