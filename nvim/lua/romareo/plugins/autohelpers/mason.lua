@@ -1,63 +1,26 @@
 local M = {
-  "williamboman/mason-lspconfig.nvim",
-  dependencies = {
-    "williamboman/mason.nvim",
-  },
+	"williamboman/mason-lspconfig.nvim",
+	dependencies = {
+		"williamboman/mason.nvim",
+	},
 }
 
 function M.config()
-  local servers = {
-    -- Lua
-    "lua_ls",
-    "stylua",
+	require("mason").setup({
+		ui = {
+			border = "rounded",
+			icons = {
+				package_installed = "✓",
+				package_pending = "➜",
+				package_uninstalled = "✗",
+			},
+		},
+	})
 
-    -- Shell/Bash
-    "bashls",
-
-    -- TypeScript/JavaScript
-    "ts_ls",
-    "prettierd",
-    "eslint_d",
-    "tailwindcss",
-    "html",
-    "cssls",
-    "emmet_ls",
-
-    -- Python
-    "pyright",
-    "autopep8",
-    "ruff",
-
-    -- Go
-    "gopls",
-    "goimports",
-    "golangci-lint",
-
-    -- Docker
-    "dockerls",
-    "docker_compose_language_service",
-
-    -- Prisma
-    "prismals",
-
-    -- C#
-    "csharpier",
-    "Roslyn Analyzers",
-
-    -- Miscellaneous
-    "biome",
-  }
-
-
-  require("mason").setup({
-    ui = {
-      border = "rounded",
-    },
-  })
-
-  require("mason-lspconfig").setup({
-    ensure_installed = servers,
-  })
+	require("mason-lspconfig").setup({
+		ensure_installed = LSP_SERVERS,
+		automatic_installation = true,
+	})
 end
 
 return M

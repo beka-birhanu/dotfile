@@ -8,6 +8,23 @@ local M = {
 	lazy = false,
 }
 
+LSP_SERVERS = {
+	"lua_ls",
+	"bashls",
+	"ts_ls",
+	"pylsp",
+	"html",
+	"cssls",
+	"tailwindcss",
+	"emmet_ls",
+	"prismals",
+	"dockerls",
+	"docker_compose_language_service",
+	"gopls",
+	"buf_ls",
+	"yamlls",
+}
+
 M.on_attach = function(_, bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
@@ -50,26 +67,7 @@ function M.config()
 	local lspconfig = require("lspconfig")
 	local icons = require("romareo.plugins.ui.icons")
 
-	local servers = {
-		"lua_ls",
-		"bashls",
-		"ts_ls",
-		"pylsp",
-		"html",
-		"cssls",
-		"tailwindcss",
-		"emmet_ls",
-		"csharp_ls",
-		"dockerls",
-		"rust-analyzer",
-		"prismals",
-		"docker_compose_language_service",
-		"gopls",
-		"jdtls",
-		"buf_ls",
-		"yamlls",
-	}
-
+	local servers = LSP_SERVERS
 	local default_diagnostic_config = {
 		signs = {
 			active = true,
@@ -113,10 +111,6 @@ function M.config()
 		local require_ok, settings = pcall(require, "romareo.plugins.autohelpers.lspsettings." .. server)
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", settings, opts)
-		end
-
-		if server == "lua_ls" then
-			require("neodev").setup({})
 		end
 
 		lspconfig[server].setup(opts)
