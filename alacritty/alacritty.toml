@@ -27,11 +27,12 @@ background = "0x1e1e2e"
 foreground = "0xf2e9e1"
 
 [window]
+opacity = 0.9
 padding.x = 4
 padding.y = 5
 decorations = "Buttonless"
 blur = true
-startup_mode = "SimpleFullscreen" # Other options: "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
+startup_mode = "Maximized" # Other options: "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
 option_as_alt = "Both"
 dynamic_title= false
 title = "Home Sweet Home"
@@ -40,3 +41,5 @@ title = "Home Sweet Home"
 normal.family = "FiraCode Nerd Font" # Other options: "JetBrains Mono Nerd Font", "MesloLG Nerd Font"
 size = 9
 
+[env]
+TERM = "xterm-256color"
