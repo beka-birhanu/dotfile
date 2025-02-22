@@ -47,11 +47,10 @@ function M.config()
 	local mappings = {
 		{
 			{ "<leader>c", group = "cph" },
-			{ "<leader>f", group = "file" },
+			{ "<leader>t", group = "telescope" },
 			{ "<leader>g", group = "git" },
 			{ "<leader>l", group = "lsp" },
 			{ "<leader>q", "<cmd>confirm q<CR>", desc = "quit" },
-			{ "<leader>t", group = "terminal" },
 			{ "<leader>v", "<cmd>vsplit<CR>", desc = "split" },
 		},
 	}

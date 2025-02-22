@@ -7,8 +7,8 @@ function M.config()
 	local icons = require("romareo.plugins.ui.icons")
 
 	local keymap = vim.api.nvim_set_keymap
-	keymap("n", "<leader>hs", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true })
-	keymap("n", "<leader>hp", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
+	keymap("n", "<leader>ghs", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true })
+	keymap("n", "<leader>ghp", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
 
 	require("gitsigns").setup({
 		signs = {

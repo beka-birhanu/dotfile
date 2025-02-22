@@ -37,7 +37,7 @@ map(normal_mode, "<s-l>", "g_", opts) -- Move cursor to the end of the line
 map(visual_mode, "<s-l>", "g_", opts) -- Move selection end to the end of the line
 
 map(normal_mode, "<C-a>", "ggVG", opts) -- Select all (beginning to end of the file)
-map(normal_mode, "<leader>d", '"_d', opts) -- Select all (beginning to end of the file)
+map(normal_mode, "<leader>d", '"_d', opts) -- delete without copying
 
 -- Insert mode mappings
 map("i", "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
@@ -46,15 +46,11 @@ map("i", "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
 map(visual_mode, "<", "<gv", opts) -- Indent left
 map(visual_mode, ">", ">gv", opts) -- Indent right
 
-map(visual_mode, "<A-j>", ":m '>+1<CR>gv=gv", opts) -- Move selected text down
-map(visual_mode, "<A-k>", ":m '<-2<CR>gv=gv", opts) -- Move selected text up
 map(visual_mode, "p", '"_dP', opts) -- Paste without yanking text
 
 -- Visual block mode mappings
 map(visual_block_mode, "J", ":m '>+1<CR>gv=gv", opts) -- Move block down
 map(visual_block_mode, "K", ":m '<-2<CR>gv=gv", opts) -- Move block up
-map(visual_block_mode, "<A-j>", ":m '>+1<CR>gv=gv", opts) -- Move block down
-map(visual_block_mode, "<A-k>", ":m '<-2<CR>gv=gv", opts) -- Move block up
 
 -- Terminal mode mappings
 map(term_mode, "<C-h>", "<C-\\><C-N><C-w>h", term_opts) -- Navigate left in terminal
