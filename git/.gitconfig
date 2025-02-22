@@ -6,7 +6,7 @@
 	defaultBranch = main
 
 [core]
-    editor = vim                            # Default editor for Git commands (can be 'nano', 'vim', 'code', etc.)
+    editor = nvim                            # Default editor for Git commands (can be 'nano', 'vim', 'code', etc.)
     autocrlf = input                         # Auto-conversion of line endings: 'input' for Unix-style, 'true' for Windows
     safecrlf = true                          # Prevent committing files with mixed line endings
 
