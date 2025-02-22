@@ -155,6 +155,11 @@ clean:
 	@mvn clean
 EOF
 
+  echo "Commiting created files"
+  git add .
+  git commit -m "init project"
+  echo "Commited created files"
+
   echo "Project $PROJECT_NAME created at $PROJECT_DIR."
   echo "Don't forget to add Tomcat 7 plugin to your pom.xml"
   
@@ -206,6 +211,10 @@ bin
 tmp
 EOF
 
+  echo "Commiting created files"
+  git add .
+  git commit -m "init project"
+  echo "Commited created files"
 
   echo "Your project is all set up with git, a Makefile containing basic commands, and Go modules initialized."
 }
