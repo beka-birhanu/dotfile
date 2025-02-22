@@ -61,9 +61,13 @@ function M.config()
 		"emmet_ls",
 		"csharp_ls",
 		"dockerls",
+		"rust-analyzer",
 		"prismals",
 		"docker_compose_language_service",
 		"gopls",
+		"jdtls",
+		"buf_ls",
+		"yamlls",
 	}
 
 	local default_diagnostic_config = {

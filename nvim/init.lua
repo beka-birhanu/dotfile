@@ -12,7 +12,6 @@ spec("romareo.plugins.ui.lualine")
 spec("romareo.plugins.ui.navic")
 spec("romareo.plugins.ui.dashboard")
 spec("romareo.plugins.ui.markdown")
-spec("romareo.plugins.ui.images")
 
 -- autohelpers
 spec("romareo.plugins.autohelpers.treesitter")
@@ -29,18 +28,15 @@ spec("romareo.plugins.autohelpers.conform")
 spec("romareo.plugins.autohelpers.surround")
 spec("romareo.plugins.autohelpers.autotag")
 spec("romareo.plugins.autohelpers.luasnip")
-spec("romareo.plugins.autohelpers.liveserver")
+spec("romareo.plugins.autohelpers.liveserver") -- just incase
 
 -- movement
 spec("romareo.plugins.movement.whichkey")
 spec("romareo.plugins.movement.nvimtree")
 spec("romareo.plugins.movement.fterm")
-spec("romareo.plugins.movement.toggleterm")
 spec("romareo.plugins.movement.telescope")
 spec("romareo.plugins.movement.harpoon")
 spec("romareo.plugins.movement.neoscroll")
-spec("romareo.plugins.movement.neotab")
-spec("romareo.plugins.movement.searchbox")
 spec("romareo.plugins.movement.goto")
 
 -- CPH
