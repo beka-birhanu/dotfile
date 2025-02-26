@@ -14,80 +14,77 @@ zinit ice depth=1
 zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Completion System
-autoload -Uz compinit && compinit
-
-# History Configuration
-HISTSIZE=1000
-SAVEHIST=$HISTSIZE
-HISTFILE=~/.zsh_history
-setopt append_history share_history hist_ignore_space hist_ignore_dups
-function zshaddhistory() {
-    emulate -L zsh
-    if [[ $1 = *"ghotp"* ]] ; then
-        return 1
-    fi
-}
-
-# Aliases
-alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias nv='nvim'
-alias fnv='nvim $(fzf --preview "cat {}")'
-alias src='source ~/.zshrc'
-alias go-m='cd ~/Documents/mereb/'
-alias go-mc-nv='go-m && cd mereb-ats-client && nv'
-alias go-ma-nv='go-m && cd mereb-ats-api && nv'
-alias go-cd='cd ~/Documents/class_2024/dist/'
-alias go-cd-nv='go-cd && nv'
-alias go-v='cd ~/Documents/vinom/'
-alias go-v-nv='go-v && nv'
-alias sysup='sudo pacman -Syu && yay -Syu'
-
-
-# Environment Variables
-export BUN_INSTALL="$HOME/.bun"
-export PATH=$BUN_INSTALL/bin:$PATH
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load NVM
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load NVM completion
-
-# Go Environment
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/go/bin
-function go_version {
-    if [ -f "go.mod" ]; then
-        v=$(grep -E '^go \d.+$' ./go.mod | grep -oE '\d.+$')
-        if [[ ! $(go version | grep "go$v") ]]; then
-          echo ""
-          echo "About to switch go version to: $v"
-          if ! command -v "$HOME/go/bin/go$v" &> /dev/null; then
-            echo "run: go install golang.org/dl/go$v@latest && go$v download && sudo cp \$(which go$v) \$(which go)"
-            return
-          fi
-          sudo cp $(which go$v) $(which go)
-        fi
-    fi
-}
-
 # Syntax Highlighting, Autosuggestions, and Completions
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
+# History Configuration
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
+#
+HISTSIZE=1000
+SAVEHIST=$HISTSIZE
+HISTFILE=~/.zsh_history
+HISTDUP=erase # Erase duplicates in the history file
+setopt append_history # Append history to the history file
+setopt share_history # Share history between all sessions
+setopt hist_ignore_space # Ignore commands that start with a space
+setopt hist_ignore_dups # Ignore duplication command history line
+setopt hist_ignore_all_dups # Ignore all duplication command history line
+setopt hist_save_no_dups # Do not save duplication command history line
+setopt hist_find_no_dups # Do not find duplication command history line
+function zshaddhistory() { # I could start it with space, but I am not willing to take the chance of forgetting.
+    emulate -L zsh
+    if [[ $1 = *"ghotp"* ]] ; then # avoid tracking github OTP command
+        return 1
+    fi
+}
+
+# Completion System
+autoload -Uz compinit && compinit
+ENABLE_CORRECTION="true"
+#
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+#
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# Aliases
+alias ls='ls --color=auto'
+alias la='ls -a --color=auto'
+alias src='source ~/.zshrc'
+alias fcd='cd $(find . -type d | fzf --preview "tree -C {} | head -50")'
+alias nv='nvim'
+alias fnv='nv $(fzf --preview "cat {}")'
+alias fdnv='fcd && nv'
+alias sysup='sudo pacman -Syu && yay -Syu'
+alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill -9"
+
 # Keybindings
 bindkey '^j' autosuggest-accept
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-bindkey '^[[1;5C' forward-word      # Ctrl + Right Arrow
-bindkey '^[[1;5D' backward-word     # Ctrl + Left Arrow
-
-# Custom Kill Program
-alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill -9"
-
-# Custom Colors for Completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+#
+bindkey '^[[1;5C' forward-word      # Ctrl + → (Right)
+bindkey '^[[1;5D' backward-word     # Ctrl + ← (Left)
+zinit light jirutka/zsh-shift-select
+#
+bindkey '^[[1~' beginning-of-line    # Home
+bindkey '^[[4~' end-of-line          # End
+#
+bindkey '^?' backward-delete-char   # Backspace
+bindkey '^[[3~' delete-char         # Delete
 
 # Open images with image previewr
 function io {
@@ -108,8 +105,50 @@ function ghotp {
 }
 
 
+# project setups
+setup_go() {
+  if [ -z "$1" ]; then
+    echo "Usage: setup_go <project_name>"
+    return 1
+  fi
 
-# Function to set up a new servlet project
+  PROJECT_NAME="$1"
+  echo "Creating Go project with name $PROJECT_NAME"
+
+  mkdir "$PROJECT_NAME" || { echo "Failed to create directory"; return 1; }
+  cd "$PROJECT_NAME" || { echo "Failed to enter directory"; return 1; }
+
+  go mod init "github.com/beka-birhanu/$PROJECT_NAME"
+
+  git init
+
+  touch Makefile
+  cat > Makefile <<EOF
+build:
+	@go build -o ./bin/$PROJECT_NAME ./main.go
+
+test:
+	go test -v ./...
+
+run: build
+	@./bin/$PROJECT_NAME
+EOF
+
+  touch .gitignore
+  cat > .gitignore <<EOF
+bin
+.env
+tmp
+EOF
+
+  echo "Commiting created files"
+  git add .
+  git commit -m "init project"
+  echo "Commited created files"
+
+  echo "Your project is all set up with git, a Makefile containing basic commands, and Go modules initialized."
+}
+#
 setup_servlet_project() {
   if [ -z "$1" ] || [ -z "$2" ]; then
       echo "Usage: setup_servlet_project <project_name> <project_id>"
@@ -174,47 +213,4 @@ EOF
         </plugin>
     </plugins>
 EOF
-}
-
-setup_go() {
-  if [ -z "$1" ]; then
-    echo "Usage: setup_go <project_name>"
-    return 1
-  fi
-
-  PROJECT_NAME="$1"
-  echo "Creating Go project with name $PROJECT_NAME"
-
-  mkdir "$PROJECT_NAME" || { echo "Failed to create directory"; return 1; }
-  cd "$PROJECT_NAME" || { echo "Failed to enter directory"; return 1; }
-
-  go mod init "github.com/beka-birhanu/$PROJECT_NAME"
-
-  git init
-
-  touch Makefile
-  cat > Makefile <<EOF
-build:
-	@go build -o ./bin/$PROJECT_NAME ./main.go
-
-test:
-	go test -v ./...
-
-run: build
-	@./bin/$PROJECT_NAME
-EOF
-
-  touch .gitignore
-  cat > .gitignore <<EOF
-bin
-.env
-tmp
-EOF
-
-  echo "Commiting created files"
-  git add .
-  git commit -m "init project"
-  echo "Commited created files"
-
-  echo "Your project is all set up with git, a Makefile containing basic commands, and Go modules initialized."
 }
