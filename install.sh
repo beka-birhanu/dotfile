@@ -71,7 +71,7 @@ setup_environment() {
       lazydocker
       git
       neovim
-      zsh # TODO: make zsh the default
+      zsh 
       alacritty
       tmux
   ) 
@@ -88,6 +88,8 @@ setup_environment() {
 
   # Install Tmux Plugin Manager
   install_tpm
+  
+  chsh -s $(which zsh) # make zsh defalut shell 
 
   # Final message
   echo "Your dev environment is ready! Neovim, Zsh, Alacritty, Tmux, and TPM are installed."
