@@ -68,7 +68,7 @@ alias fcd='cd $(find . -type d | fzf --preview "tree -C {} | head -50")'
 alias nv='nvim'
 alias fnv='nv $(fzf --preview "cat {}")'
 alias fdnv='fcd && nv'
-alias sysup='sudo pacman -Syu && yay -Syu'
+alias sysup='sudo pacman -Syu --noconfirm && yay -Syu --noconfirm'
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill -9"
 
 # Keybindings
