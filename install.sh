@@ -71,7 +71,7 @@ setup_environment() {
       lazydocker
       git
       neovim
-      zsh
+      zsh # TODO: make zsh the default
       alacritty
       tmux
   ) 
