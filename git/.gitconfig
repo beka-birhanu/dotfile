@@ -11,12 +11,8 @@
     safecrlf = true                          # Prevent committing files with mixed line endings
 
 [alias]
-    st = status                              # 'git st' is an alias for 'git status'
-    co = checkout                            # 'git co' is an alias for 'git checkout'
-    br = branch                              # 'git br' is an alias for 'git branch'
-    ci = commit                              # 'git ci' is an alias for 'git commit'
-    lg = log --oneline --graph --decorate --all  # 'git lg' gives a concise log with a graphical representation
-    df = diff --color-words                   # 'git df' shows colorized diff with words instead of lines
+    log = log --oneline --graph --decorate --all  # 'git lg' gives a concise log with a graphical representation
+    diff = diff --color-words                   # 'git df' shows colorized diff with words instead of lines
 
 [color]
     ui = auto                                # Automatically colorize git output
