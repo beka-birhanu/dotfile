@@ -54,15 +54,16 @@ install_tpm() {
 # Main setup function
 setup_environment() {
   echo "Welcome, a soy dev who couldn't install things themselves."
+  echo "Wanna hear something funny?.......... I have never used this script! GOOD LUCK 😄"
   ask_confirmation "Do you have pacman, or are you still using apt? 😹"
 
   # Declare an associative array mapping package names to config paths
   declare -A packages_and_configs=(
-      [git]="./git/.gitconfig ~/.gitconfig"
-      [neovim]="./nvim ~/.config/nvim" 
-      [zsh]="./zsh ~/.zshrc"
-      [alacritty]="./alacritty ~/.config/alacritty"
-      [tmux]="./tmux ~/.config/tmux"
+      [git]="./git/.gitconfig $HOME/.gitconfig"
+      [neovim]="./nvim $HOME/.config/nvim" 
+      [zsh]="./zsh $HOME/.zshrc"
+      [alacritty]="./alacritty $HOME/.config/alacritty"
+      [tmux]="./tmux $HOME/.config/tmux"
   )
 
   declare -a packages=(
