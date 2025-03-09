@@ -94,6 +94,11 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q set 1%+
 bindsym $mod+Shift+period exec systemctl suspend
 bindsym $mod+Shift+Delete exec systemctl poweroff
 
+bindsym --release Print exec scrot ~/Pictures/Screenshots/%Y-%m-%d-%H%M%S.png # fullscreen
+bindsym --release $mod+Print exec scrot -s -f ~/Pictures/Screenshots/%Y-%m-%d-%H%M%S.png # selection
+bindsym --release Shift+Print exec scrot -o /tmp/imageSOMErandomUniqueFile97529843572039485.png && xclip -selection clipboard -t imageSOMErandomUniqueFile97529843572039485/png -i /tmp/image.png # fullscreen to clipboard
+bindsym --release $mod+Shift+Print exec scrot -s -f -o /tmp/imageSOMErandomUniqueFile97529843572039485.png && xclip -selection clipboard -t image/png -i /tmp/imageSOMErandomUniqueFile97529843572039485.png # selection to clipboard
+
 # Bar Configuration
 bar {
     status_command i3status
@@ -103,6 +108,7 @@ bar {
 # Startup Applications
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaper/wolf.jpg
+exec --no-startup-id i3-battery-popup
 exec --no-startup-id i3-msg "workspace 10; exec alacritty -e tmux a || tmux"
 exec --no-startup-id i3-msg "workspace 9; exec brave"
 exec --no-startup-id i3-msg "workspace 8; exec telegram-desktop"
@@ -112,4 +118,4 @@ for_window [class="Alacritty"] move to workspace 10
 for_window [class="Brave-browser"] move to workspace 9
 for_window [class="TelegramDesktop"] move to workspace 8
 for_window [class="TelegramDesktop"] floating enable
-
+for_window [title="Battery Warning"] sticky enable
