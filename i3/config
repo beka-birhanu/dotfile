@@ -17,10 +17,10 @@ floating_modifier $mod
 # Keybindings
 ## Launch Applications
 bindsym $mod+Return exec alacritty
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+m exec --no-startup-id i3-dmenu-desktop
 
 ## Window Management
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -29,18 +29,16 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-bindsym $mod+z split h
-bindsym $mod+v split v
+### I like it like this; suck it up--(directions are supposed to be named after the cutting line).
+bindsym $mod+b split v
+bindsym $mod+v split h
+
 bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+space layout toggle split
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+a focus parent
+bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
 ## Resize Mode
@@ -49,11 +47,6 @@ mode "resize" {
     bindsym j resize grow height 10 px or 10 ppt
     bindsym k resize shrink height 10 px or 10 ppt
     bindsym l resize grow width 10 px or 10 ppt
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-    bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
@@ -69,27 +62,29 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace 1;workspace 1
+bindsym $mod+Shift+2 move container to workspace 2;workspace 2
+bindsym $mod+Shift+3 move container to workspace 3;workspace 3
+bindsym $mod+Shift+4 move container to workspace 4;workspace 4
+bindsym $mod+Shift+5 move container to workspace 5;workspace 5
+bindsym $mod+Shift+6 move container to workspace 6;workspace 6
+bindsym $mod+Shift+7 move container to workspace 7;workspace 7
+bindsym $mod+Shift+8 move container to workspace 8;workspace 8
+bindsym $mod+Shift+9 move container to workspace 9;workspace 9
+bindsym $mod+Shift+0 move container to workspace 10;workspace 10
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
 
 ## Session Management
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 ## System Controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute 0 0 && pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --min-val=2 -q set 1%-
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -q set 1%-
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q set 1%+
 bindsym $mod+Shift+period exec systemctl suspend
 bindsym $mod+Shift+Delete exec systemctl poweroff
@@ -98,7 +93,7 @@ bindsym --release Print exec scrot ~/Pictures/Screenshots/%Y-%m-%d-%H%M%S.png # 
 bindsym --release $mod+Print exec scrot -s -f ~/Pictures/Screenshots/%Y-%m-%d-%H%M%S.png # selection
 bindsym --release Shift+Print exec scrot -o /tmp/imageSOMErandomUniqueFile97529843572039485.png && xclip -selection clipboard -t imageSOMErandomUniqueFile97529843572039485/png -i /tmp/image.png # fullscreen to clipboard
 bindsym --release $mod+Shift+Print exec scrot -s -f -o /tmp/imageSOMErandomUniqueFile97529843572039485.png && xclip -selection clipboard -t image/png -i /tmp/imageSOMErandomUniqueFile97529843572039485.png # selection to clipboard
-
+ 
 # Bar Configuration
 bar {
     status_command i3status
@@ -108,8 +103,7 @@ bar {
 # Startup Applications
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaper/wolf.jpg
-exec --no-startup-id i3-battery-popup
-exec --no-startup-id i3-msg "workspace 10; exec alacritty -e tmux a || tmux"
+exec --no-startup-id i3-msg "workspace 10; exec alacritty -e tmux"
 exec --no-startup-id i3-msg "workspace 9; exec brave"
 exec --no-startup-id i3-msg "workspace 8; exec telegram-desktop"
 
@@ -118,4 +112,3 @@ for_window [class="Alacritty"] move to workspace 10
 for_window [class="Brave-browser"] move to workspace 9
 for_window [class="TelegramDesktop"] move to workspace 8
 for_window [class="TelegramDesktop"] floating enable
-for_window [title="Battery Warning"] sticky enable
