@@ -103,7 +103,7 @@ bar {
 # Startup Applications
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaper/wolf.jpg
-exec --no-startup-id i3-msg "workspace 10; exec alacritty -e tmux"
+exec --no-startup-id i3-msg "workspace 10; exec alacritty"
 exec --no-startup-id i3-msg "workspace 9; exec brave"
 exec --no-startup-id i3-msg "workspace 8; exec telegram-desktop"
 

@@ -34,12 +34,16 @@ decorations = "Buttonless"
 blur = true
 startup_mode = "Maximized" # Other options: "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
 option_as_alt = "Both"
-dynamic_title= false
+dynamic_title = false
 title = "Home Sweet Home"
 
 [font]
 normal.family = "FiraCode Nerd Font" # Other options: "JetBrains Mono Nerd Font", "MesloLG Nerd Font"
 size = 9
+
+[terminal.shell]
+program = "/bin/bash"
+args = ["-c", "tmux a || tmux; exec $SHELL"]
 
 [env]
 TERM = "xterm-256color"
