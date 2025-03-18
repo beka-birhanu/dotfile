@@ -12,10 +12,22 @@ ask_confirmation() {
 
 # Function to check and install a package
 install_package() {
-  if ! command -v "$1" &> /dev/null; then
+  if ! pacman -Qi "$1" &> /dev/null; then
     echo "$1 is missing. Installing $1..."
-    sudo pacman -S --needed "$1" || { echo "Failed to install $1. Exiting."; exit 1; }
-    echo "$1 installed successfully."
+    
+    if sudo pacman -S --needed "$1"; then
+      echo "$1 installed successfully using pacman."
+      return 0
+    fi
+    
+    echo "Pacman failed to install $1. Trying yay..."
+    
+    if command -v yay &> /dev/null && yay -S --needed "$1"; then
+      echo "$1 installed successfully using yay."
+      return 0
+    fi
+    
+    echo "Neither pacman nor yay could install $1. Sorry, looks like you are going to have to build it yourself."
   else
     echo "$1 is already installed. Skipping."
   fi
@@ -29,7 +41,6 @@ sm_link_config() {
     # Ensure the parent directory of the symlink exists
     mkdir -p "$(dirname "$symlink_dir")"
 
-    # Create the symbolic link without force (-f)
     ln -s "$source_path" "$symlink_dir"
 
     # Check if ln was successful
@@ -42,9 +53,9 @@ sm_link_config() {
 
 # Install Tmux Plugin Manager (TPM)
 install_tpm() {
-  if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+  if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
     echo "Installing Tmux Plugin Manager (TPM)..."
-    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm" || { echo "Failed to install TPM. Exiting."; exit 1; }
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm" || { echo "Failed to install TPM. Exiting."; exit 1; }
     echo "TPM installed successfully."
   else
     echo "TPM is already installed. Skipping."
@@ -53,29 +64,38 @@ install_tpm() {
 
 # Main setup function
 setup_environment() {
-  echo "Welcome, a soy dev who couldn't install things themselves."
-  echo "Wanna hear something funny?.......... I have never used this script! GOOD LUCK 😄"
-  ask_confirmation "Do you have pacman, or are you still using apt? 😹"
+  echo "Welcome, dady."
+  ask_confirmation "You are using pacman, not apt, Right? 😹"
 
   # Declare an associative array mapping package names to config paths
   declare -A packages_and_configs=(
-      [git]="./git/.gitconfig $HOME/.gitconfig"
-      [neovim]="./nvim $HOME/.config/nvim" 
-      [zsh]="./zsh $HOME/.zshrc"
       [alacritty]="./alacritty $HOME/.config/alacritty"
+      [git]="./git/.gitconfig $HOME/.gitconfig"
+      [i3]="./i3 $HOME/.config/i3"
+      [i3status]="./i3status $HOME/.config/i3status"
+      [neovim]="./nvim $HOME/.config/nvim" 
+      [picom]="./picom $HOME/.config/picom" 
       [tmux]="./tmux $HOME/.config/tmux"
+      [zsh]="./zsh $HOME/.zshrc"
   )
 
   declare -a packages=(
-      ripgrep
-      lazygit
-      lazydocker
-      git
-      neovim
-      zsh 
       alacritty
+      git
+      i3
+      i3status
+      i3lock
+      i3bar
+      lazydocker
+      lazygit
+      neovim
+      ripgrep
       tmux
+      zsh 
   ) 
+
+  # Did even bother to find a better way to handle yay
+  sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && cd ..
 
   # Install packages and link configs
   for package in "${packages[@]}"; do
@@ -83,7 +103,8 @@ setup_environment() {
 
       # Check if the package has a corresponding config in the associative array
       if [[ -n "${packages_and_configs[$package]}" ]]; then
-          sm_link_config "${packages_and_configs[$package]}"
+        read -r source_path symlink_dir <<< "${packages_and_configs[$package]}"
+        sm_link_config "$source_path" "$symlink_dir"
       fi
   done
 
@@ -99,4 +120,3 @@ setup_environment() {
 
 # Execute the main setup
 setup_environment
-
