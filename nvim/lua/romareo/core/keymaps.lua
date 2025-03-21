@@ -1,5 +1,4 @@
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 -- Shorten function name
 local map = vim.api.nvim_set_keymap
@@ -37,7 +36,7 @@ map(normal_mode, "<s-l>", "g_", opts) -- Move cursor to the end of the line
 map(visual_mode, "<s-l>", "g_", opts) -- Move selection end to the end of the line
 
 map(normal_mode, "<C-a>", "ggVG", opts) -- Select all (beginning to end of the file)
-map(normal_mode, "<leader>d", '"_d', opts) -- delete without copying
+map(normal_mode, "<M-d>", '"_d', opts) -- delete without copying
 
 -- Insert mode mappings
 map("i", "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
@@ -51,9 +50,3 @@ map(visual_mode, "p", '"_dP', opts) -- Paste without yanking text
 -- Visual block mode mappings
 map(visual_block_mode, "J", ":m '>+1<CR>gv=gv", opts) -- Move block down
 map(visual_block_mode, "K", ":m '<-2<CR>gv=gv", opts) -- Move block up
-
--- Terminal mode mappings
-map(term_mode, "<C-h>", "<C-\\><C-N><C-w>h", term_opts) -- Navigate left in terminal
-map(term_mode, "<C-j>", "<C-\\><C-N><C-w>j", term_opts) -- Navigate down in terminal
-map(term_mode, "<C-k>", "<C-\\><C-N><C-w>k", term_opts) -- Navigate up in terminal
-map(term_mode, "<C-l>", "<C-\\><C-N><C-w>l", term_opts) -- Navigate right in terminal
