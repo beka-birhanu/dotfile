@@ -23,6 +23,7 @@ LSP_SERVERS = {
 	"gopls",
 	"buf_ls",
 	"yamlls",
+	"rust_analyzer",
 }
 
 M.on_attach = function(_, bufnr)
