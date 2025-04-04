@@ -88,7 +88,7 @@ bindkey '^?' backward-delete-char   # Backspace
 bindkey '^[[3~' delete-char         # Delete
 
 # Open images with image previewr
-function io {
+function image {
     if [[ "$1" =~ \.(jpg|jpeg|png|gif|bmp|tiff)$ ]]; then
         xdg-open "$1"
     else
