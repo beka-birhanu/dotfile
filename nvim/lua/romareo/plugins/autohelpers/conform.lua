@@ -28,6 +28,7 @@ M.config = function()
 			yaml = { "prettierd" },
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
+			proto = { "prettierd" },
 			razor = { "prettierd" },
 			lua = { "stylua" },
 			python = { "autopep8" },

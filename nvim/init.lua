@@ -1,3 +1,4 @@
+vim = vim
 require("romareo.plugins.utils.launch")
 require("romareo.core.options")
 require("romareo.core.keymaps")

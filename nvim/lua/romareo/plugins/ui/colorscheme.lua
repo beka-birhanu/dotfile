@@ -7,6 +7,7 @@ local M = {
 
 function M.config()
 	require("catppuccin").setup({
+		transparent_background = true,
 		highlight_overrides = {
 			all = function(colors)
 				return {}
