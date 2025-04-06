@@ -31,12 +31,12 @@ map(normal_mode, "<C-Left>", ":vertical resize -2<CR>", opts) -- Resize window l
 map(normal_mode, "<C-Right>", ":vertical resize +2<CR>", opts) -- Resize window right
 
 map(normal_mode, "<s-h>", "^", opts) -- Move cursor to the beginning of the line
-map(visual_mode, "<s-h>", "^", opts) -- Move selection start to the beginning of the line
 map(normal_mode, "<s-l>", "g_", opts) -- Move cursor to the end of the line
-map(visual_mode, "<s-l>", "g_", opts) -- Move selection end to the end of the line
 
 map(normal_mode, "<C-a>", "ggVG", opts) -- Select all (beginning to end of the file)
 map(normal_mode, "<M-d>", '"_d', opts) -- delete without copying
+
+map(normal_mode, "<BS>", '"_d', opts)
 
 -- Insert mode mappings
 map("i", "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
@@ -45,8 +45,11 @@ map("i", "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
 map(visual_mode, "<", "<gv", opts) -- Indent left
 map(visual_mode, ">", ">gv", opts) -- Indent right
 
-map(visual_mode, "p", '"_dP', opts) -- Paste without yanking text
+map(visual_mode, "<s-h>", "^", opts) -- Move selection start to the beginning of the line
+map(visual_mode, "<s-l>", "g_", opts) -- Move selection end to the end of the line
 
--- Visual block mode mappings
+map(visual_mode, "p", '"_dP', opts) -- Paste without yanking text
+map(visual_mode, "<BS>", '"_d', opts)
+
 map(visual_block_mode, "J", ":m '>+1<CR>gv=gv", opts) -- Move block down
 map(visual_block_mode, "K", ":m '<-2<CR>gv=gv", opts) -- Move block up
