@@ -35,5 +35,6 @@
 
 [rebase]
     autoStash = true                         # Automatically stash changes before a rebase
+
 [url "git@github.com:"]
 	insteadOf = https://github.com/
