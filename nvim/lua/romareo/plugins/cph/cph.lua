@@ -66,7 +66,6 @@ function M.config()
 				height = 0.5,
 				show_nu = true,
 				show_rnu = false,
-				close_mappings = { "q", "Q" },
 			},
 		},
 		popup_ui = {

@@ -13,6 +13,7 @@ local normal_mode = "n"
 local visual_mode = "v"
 local visual_block_mode = "x"
 local term_mode = "t"
+local insert_mode = "i"
 
 -- Normal mode mappings
 map(normal_mode, "<C-h>", "<C-w>h", opts) -- Navigate left
@@ -39,7 +40,7 @@ map(normal_mode, "<M-d>", '"_d', opts) -- delete without copying
 map(normal_mode, "<BS>", '"_d', opts)
 
 -- Insert mode mappings
-map("i", "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
+map(insert_mode, "jk", "<ESC>", opts) -- Quickly exit insert mode by typing jk
 
 -- Visual mode mappings
 map(visual_mode, "<", "<gv", opts) -- Indent left

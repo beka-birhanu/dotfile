@@ -100,7 +100,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			0,
 			"n",
 			"<leader>ge",
-			"oif err != nil {\n\treturn err\n}",
+			"oif err != nil {\n\treturn nil, err\n}",
 			{ noremap = true, silent = true }
 		)
 	end,
