@@ -27,7 +27,7 @@ background = "0x1e1e2e"
 foreground = "0xf2e9e1"
 
 [window]
-opacity = 1.0
+opacity = 0.75
 padding.x = 4
 padding.y = 5
 decorations = "Buttonless"
@@ -38,8 +38,8 @@ dynamic_title = false
 title = "Home Sweet Home"
 
 [font]
-normal.family = "FiraCode Nerd Font" # Other options: "JetBrains Mono Nerd Font", "MesloLG Nerd Font"
-size = 9
+normal.family = "JetBrains Mono Nerd Font" # Other options: "FiraCode Nerd Font", "MesloLG Nerd Font"
+size = 11
 
 [terminal.shell]
 program = "/bin/bash"
