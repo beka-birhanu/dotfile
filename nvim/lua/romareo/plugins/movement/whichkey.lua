@@ -52,6 +52,7 @@ function M.config()
 			{ "<leader>l", group = "lsp" },
 			{ "<leader>q", "<cmd>confirm q<CR>", desc = "quit" },
 			{ "<leader>v", "<cmd>vsplit<CR>", desc = "split" },
+			{ "<leader>b", "<cmd>split<CR>", desc = "split" },
 		},
 	}
 	which_key.add(mappings, opts)
