@@ -8,6 +8,10 @@ local M = {
 function M.config()
 	require("catppuccin").setup({
 		transparent_background = true,
+		float = {
+			transparent = true, -- enable transparent floating windows
+			solid = false, -- use solid styling for floating windows, see |winborder|
+		},
 		highlight_overrides = {
 			all = function(colors)
 				return {}
@@ -34,7 +38,7 @@ function M.config()
 					-- Other color definitions...
 					String = { fg = mocha.text }, -- Set string color to white
 					-- Floats
-					FloatBorder = { fg = mocha.surface2 },
+					FloatBorder = { fg = mocha.overlay1 },
 					-- Mason Colours-
 					MasonHeader = { fg = mocha.base, bg = mocha.peach },
 					MasonHeaderSecondary = { fg = mocha.base, bg = mocha.teal },
@@ -56,7 +60,7 @@ function M.config()
 					AlphaSectionHeader = { fg = mocha.surface2, bold = true },
 					AlphaShortcut = { fg = mocha.surface2 },
 					--Telescope Colours
-					TelescopeNormal = { fg = mocha.text, bg = mocha.mantle },
+					TelescopeNormal = { fg = mocha.text },
 					TelescopeBorder = { fg = mocha.surface2 },
 					TelescopeTitle = { fg = mocha.subtext },
 					--ToggleTerm Custom Colours
@@ -69,6 +73,10 @@ function M.config()
 					Generics = { fg = mocha.purple }, -- Adjust color as needed
 					-- Highlighting for Constants
 					Constant = { fg = mocha.green }, -- Adjust color as needed
+					-- Cmp Colours
+					CmpNormal = { fg = mocha.text },
+					CmpBorder = { fg = mocha.surface2 },
+					CmpTitle = { fg = mocha.subtext },
 				}
 			end,
 		},
