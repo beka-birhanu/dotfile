@@ -12,7 +12,7 @@ vim.g.maplocalleader = " " -- Set space as local leader key
 local normal_mode = "n"
 local visual_mode = "v"
 local visual_block_mode = "x"
-local term_mode = "t"
+-- local term_mode = "t"
 local insert_mode = "i"
 
 -- Normal mode mappings

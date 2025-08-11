@@ -51,3 +51,4 @@ vim.cmd([[set iskeyword+=-]]) -- add '-' to 'iskeyword' option
 
 vim.g.netrw_banner = 0 -- disable netrw banner
 vim.g.netrw_mouse = 2 -- enable netrw mouse
+vim.opt.conceallevel = 2 -- enable conceal
