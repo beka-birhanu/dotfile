@@ -49,4 +49,8 @@ spec("romareo.plugins.git.gitsign")
 spec("romareo.plugins.git.gitfugitive")
 spec("romareo.plugins.git.lazygit")
 
+-- ai
+-- spec("romareo.plugins.ai.supermaven")
+-- spec("romareo.plugins.ai.copilot")
+
 require("romareo.plugins.utils.lazy")
