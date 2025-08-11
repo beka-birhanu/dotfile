@@ -51,8 +51,26 @@ function M.config()
 			{ "<leader>g", group = "git" },
 			{ "<leader>l", group = "lsp" },
 			{ "<leader>q", "<cmd>confirm q<CR>", desc = "quit" },
-			{ "<leader>v", "<cmd>vsplit<CR>", desc = "split" },
-			{ "<leader>b", "<cmd>split<CR>", desc = "split" },
+			{ "<leader>v", "<cmd>vsplit<CR>", desc = "vertical split" },
+			{ "<leader>b", "<cmd>split<CR>", desc = "horizontal split" },
+			{
+				"<leader>f",
+				function()
+					local cur_width = vim.api.nvim_win_get_width(0)
+					local cur_height = vim.api.nvim_win_get_height(0)
+					local total_width = vim.o.columns
+					local total_height = vim.o.lines - vim.o.cmdheight
+
+					-- If already maximized in both dimensions → equalize
+					if cur_width >= total_width - 5 and cur_height >= total_height - 5 then
+						vim.cmd("wincmd =") -- equalize all windows
+					else
+						vim.cmd("wincmd |") -- maximize width
+						vim.cmd("wincmd _") -- maximize height
+					end
+				end,
+				desc = "Toggle maximize/equalize split (width & height)",
+			},
 		},
 	}
 	which_key.add(mappings, opts)
