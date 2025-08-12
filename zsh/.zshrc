@@ -76,7 +76,7 @@ alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill -9"
 alias ta='eval tmux attach -t "$(tmux list-sessions | awk -F':' '"'"'{print $1}'"'"' | fzf)"'
 
 # Keybindings
-bindkey '^j' autosuggest-accept
+bindkey '^y' autosuggest-accept
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 #
