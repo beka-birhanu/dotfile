@@ -13,6 +13,7 @@ spec("romareo.plugins.ui.lualine")
 spec("romareo.plugins.ui.navic")
 spec("romareo.plugins.ui.dashboard")
 spec("romareo.plugins.ui.markdown")
+spec("romareo.plugins.ui.csv")
 
 -- autohelpers
 spec("romareo.plugins.autohelpers.treesitter")
