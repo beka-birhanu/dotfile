@@ -22,6 +22,10 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
+export FZF_DEFAULT_OPTS="
+  --color=bg+:#1e1e2e,fg:#6c7086,header:#6c7086,info:#6c7086,pointer:#6c7086,marker:#6c7086,prompt:#6c7086,spinner:#6c7086,hl:#cba6f7,hl+:#cba6f7
+"
+
 # History Configuration
 zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
