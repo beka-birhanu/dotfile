@@ -1,0 +1,94 @@
+# General GUI Settings
+gui:
+  showIcons: false
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      # - "#cba6f7" # lavender
+      - "#9399b2" # overlay2
+      - bold
+    inactiveBorderColor:
+      # - "#45475a" # surface1
+      # - "#cba6f7" # lavender (same as active, no bold)
+      - "#7f849c" # overlay1
+    selectedLineBgColor:
+      # - "#45475a" # surface1
+      - "#6c7086" # overlay0
+    selectedRangeBgColor:
+      # - "#45475a" # surface1
+      - "#6c7086" # overlay0
+    cherryPickedCommitBgColor:
+      - "#a6e3a1" # green
+    cherryPickedCommitFgColor:
+      - "#11111b" # base
+    markedBaseCommitFgColor:
+      - "#fab387" # peach
+    markedBaseCommitBgColor:
+      - "#11111b" # base
+    unstagedChangesColor:
+      - "#f38ba8" # red
+    defaultFgColor:
+      # - "#cdd6f4" # text
+      - "#9399b2" # overlay2
+    inactiveViewSelectedLineBgColor:
+      - "#cdd6f4" # surface1
+      # - "#9399b2" # overlay2
+    optionsTextColor:
+      # - "#cdd6f4"
+      - "#9399b2" # overlay2
+    searchingActiveBorderColor:
+      - "#f38ba8" # pink accent for search
+
+
+# Git Settings
+git:
+  showIcons: true
+  paging:
+    useConfig: true
+    colorArg: always
+    pager: delta --paging=never --line-numbers --features=colibri
+  diff:
+    tool: vimdiff
+  editor:
+    command: "nvim"
+    template: "{{editor}} {{filename}}"
+  services:
+    "github.com": "github:github.com"
+    "gitlab.com": "gitlab:gitlab.com"
+    "bitbucket.org": "bitbucket:bitbucket.org"
+  pullRequest:
+    create:
+      command: "hub pull-request"
+      args:
+        - "--base"
+        - "{{prompt \"Enter the base branch:\" \"main\"}}"
+        - "--head"
+        - "{{branch}}"
+        - "--push"
+        - "--no-edit"
+    view:
+      command: "hub browse"
+      args:
+        - "pull/{{id}}"
+
+# Services Configuration
+services:
+  "github.com": "github:github.com"
+  "gitlab.com": "gitlab:gitlab.com"
+  "bitbucket.org": "bitbucket:bitbucket.org"
+
+# File Tree Settings
+fileTree:
+  enabled: true
+  showHidden: true
+  showIgnored: false
+  showStaged: true
+  showUntracked: true
+
+# Delta Diff Tool Configuration
+delta:
+  syntaxTheme: "base16"
+  lineNumbers: true
+  sideBySide: true
+  navigate: true
+  light: true

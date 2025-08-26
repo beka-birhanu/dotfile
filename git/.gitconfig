@@ -1,40 +1,41 @@
 [user]
-	name = beka birhanu
-	email = beka.b.atomsa@gmail.com
+    name = beka birhanu
+    email = beka.b.atomsa@gmail.com
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [core]
-    editor = nvim                            # Default editor for Git commands (can be 'nano', 'vim', 'code', etc.)
-    autocrlf = input                         # Auto-conversion of line endings: 'input' for Unix-style, 'true' for Windows
-    safecrlf = true                          # Prevent committing files with mixed line endings
+    editor = nvim
+    autolf = true
+    safecrlf = true
 
 [alias]
-    log = log --oneline --graph --decorate --all  # 'git lg' gives a concise log with a graphical representation
-    diff = diff --color-words                   # 'git df' shows colorized diff with words instead of lines
+    lg = log --oneline --graph --decorate --all
+    df = diff --color-words
 
 [color]
-    ui = auto                                # Automatically colorize git output
+    ui = auto
 
 [push]
-    default = simple                         # Push to the current branch by default
+    default = simple
 
 [merge]
-    tool = vimdiff                           # Default merge tool
-    conflictstyle = diff3                    # Use three-way diff when conflicts occur
+    tool = vimdiff
+    conflictstyle = diff3
 
 [commit]
-    gpgSign = false                          # Set to true if you want to sign commits with GPG
+    gpgSign = false
 
 [credential]
-    helper = cache --timeout=3600            # Store credentials in memory for 1 hour
+    helper = cache --timeout=3600
 
 [diff]
-    tool = vimdiff                           # Default diff tool
+    tool = vimdiff
 
 [rebase]
-    autoStash = true                         # Automatically stash changes before a rebase
+    autoStash = true
 
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
+
