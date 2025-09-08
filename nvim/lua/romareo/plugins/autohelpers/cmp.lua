@@ -61,6 +61,9 @@ function M.config()
 			end,
 		},
 		mapping = cmp.mapping.preset.insert({
+			-- Disable <C-y> (stop it from confirming suggestions)
+			["<C-y>"] = cmp.config.disable,
+
 			["<C-k>"] = cmp.mapping.scroll_docs(-4),
 			["<C-j>"] = cmp.mapping.scroll_docs(4),
 			["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
