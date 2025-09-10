@@ -19,7 +19,7 @@ M.config = function()
 	conform.setup({
 		formatters_by_ft = {
 			javascript = { "prettierd" },
-			typescript = { "biome" },
+			-- typescript = { "biome" },
 			javascriptreact = { "prettierd" },
 			typescriptreact = { "biome" },
 			css = { "prettierd" },

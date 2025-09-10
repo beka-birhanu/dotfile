@@ -12,8 +12,9 @@ function M.config()
 		sections = {
 			lualine_a = {},
 			lualine_b = { "branch" },
-			lualine_c = { "diagnostics" },
-			lualine_y = { "progress" },
+			lualine_c = {},
+			lualine_x = {},
+			lualine_y = {},
 			lualine_z = {},
 		},
 		extensions = { "quickfix", "man", "fugitive" },

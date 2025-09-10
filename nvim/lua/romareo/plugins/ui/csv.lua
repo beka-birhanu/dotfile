@@ -1,7 +1,5 @@
 local M = {
 	"hat0uma/csvview.nvim",
-	---@module "csvview"
-	---@type CsvView.Options
 	opts = {
 		parser = { comments = { "#", "//" } },
 		keymaps = {

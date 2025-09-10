@@ -12,8 +12,8 @@
     pager = delta
 
 [alias]
-    lg = log --oneline --graph --decorate --all
-    df = diff --color-words
+    log = log --oneline --graph --decorate --all
+    diff = diff --color-words
 
 [color]
     ui = auto

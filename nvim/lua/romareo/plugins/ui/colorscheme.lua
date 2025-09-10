@@ -13,16 +13,16 @@ function M.config()
 			solid = false, -- use solid styling for floating windows, see |winborder|
 		},
 		highlight_overrides = {
-			all = function(colors)
+			all = function()
 				return {}
 			end,
-			latte = function(latte)
+			latte = function()
 				return {}
 			end,
-			frappe = function(frappe)
+			frappe = function()
 				return {}
 			end,
-			macchiato = function(macchiato)
+			macchiato = function()
 				return {}
 			end,
 			mocha = function(mocha)
@@ -81,7 +81,7 @@ function M.config()
 			end,
 		},
 	})
-	vim.cmd.colorscheme("catppuccin")
+	Vim.cmd.colorscheme("catppuccin")
 end
 
 return M

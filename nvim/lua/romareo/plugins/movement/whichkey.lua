@@ -56,17 +56,17 @@ function M.config()
 			{
 				"<leader>f",
 				function()
-					local cur_width = vim.api.nvim_win_get_width(0)
-					local cur_height = vim.api.nvim_win_get_height(0)
-					local total_width = vim.o.columns
-					local total_height = vim.o.lines - vim.o.cmdheight
+					local cur_width = Vim.api.nvim_win_get_width(0)
+					local cur_height = Vim.api.nvim_win_get_height(0)
+					local total_width = Vim.o.columns
+					local total_height = Vim.o.lines - Vim.o.cmdheight
 
 					-- If already maximized in both dimensions → equalize
 					if cur_width >= total_width - 5 and cur_height >= total_height - 5 then
-						vim.cmd("wincmd =") -- equalize all windows
+						Vim.cmd("wincmd =") -- equalize all windows
 					else
-						vim.cmd("wincmd |") -- maximize width
-						vim.cmd("wincmd _") -- maximize height
+						Vim.cmd("wincmd |") -- maximize width
+						Vim.cmd("wincmd _") -- maximize height
 					end
 				end,
 				desc = "Toggle maximize/equalize split (width & height)",

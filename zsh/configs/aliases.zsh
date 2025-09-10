@@ -3,9 +3,6 @@
 # -------------------------
 alias cat='bat --style=plain --pager=never --theme="Catppuccin Mocha"'
 alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias src='source ~/.zshrc'
-alias nv='nvim'
 alias sysup='sudo pacman -Syu --noconfirm && yay -Syu --noconfirm'
 
 # -------------------------

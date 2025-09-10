@@ -7,7 +7,7 @@ local M = {
 }
 
 function M.config()
-	local keymap = vim.keymap.set
+	local keymap = Vim.keymap.set
 	local opts = { noremap = true, silent = true }
 
 	keymap("n", "<leader>m", "<cmd>lua require('romareo.plugins.movement.harpoon').mark_file()<cr>", opts)
@@ -16,7 +16,7 @@ end
 
 function M.mark_file()
 	require("harpoon.mark").add_file()
-	vim.notify("󱡅  marked file")
+	Vim.notify("󱡅  marked file")
 end
 
 return M

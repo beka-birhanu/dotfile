@@ -3,7 +3,7 @@ local M = {
 }
 
 function M.config()
-	vim.cmd([[
+	Vim.cmd([[
   nnoremap <C-j> <C-D>
   vnoremap <C-j> <C-D>
 
@@ -56,7 +56,7 @@ function M.config()
 
 	local modes = { "n", "v", "x" }
 	for key, func in pairs(keymap) do
-		vim.keymap.set(modes, key, func)
+		Vim.keymap.set(modes, key, func)
 	end
 end
 

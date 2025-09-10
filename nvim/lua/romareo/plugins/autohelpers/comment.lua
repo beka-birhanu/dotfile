@@ -16,7 +16,7 @@ function M.config()
 		{ "<leader>/", "<Plug>(comment_toggle_linewise_visual)", mode = "v", desc = "Comment" },
 	})
 
-	vim.g.skip_ts_context_commentstring_module = true
+	Vim.g.skip_ts_context_commentstring_module = true
 	---@diagnostic disable: missing-fields
 	require("ts_context_commentstring").setup({
 		enable_autocmd = false,

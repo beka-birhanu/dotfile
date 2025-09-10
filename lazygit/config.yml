@@ -2,7 +2,6 @@
 gui:
   showIcons: false
   theme:
-    lightTheme: false
     activeBorderColor:
       # - "#cba6f7" # lavender
       - "#9399b2" # overlay2
@@ -12,9 +11,6 @@ gui:
       # - "#cba6f7" # lavender (same as active, no bold)
       - "#7f849c" # overlay1
     selectedLineBgColor:
-      # - "#45475a" # surface1
-      - "#6c7086" # overlay0
-    selectedRangeBgColor:
       # - "#45475a" # surface1
       - "#6c7086" # overlay0
     cherryPickedCommitBgColor:
@@ -39,56 +35,14 @@ gui:
     searchingActiveBorderColor:
       - "#f38ba8" # pink accent for search
 
-
 # Git Settings
 git:
-  showIcons: true
   paging:
-    useConfig: true
     colorArg: always
-    pager: delta --paging=never 
-  diff:
-    tool: vimdiff
-  editor:
-    command: "nvim"
-    template: "{{editor}} {{filename}}"
-  services:
-    "github.com": "github:github.com"
-    "gitlab.com": "gitlab:gitlab.com"
-    "bitbucket.org": "bitbucket:bitbucket.org"
-  pullRequest:
-    create:
-      command: "hub pull-request"
-      args:
-        - "--base"
-        - "{{prompt \"Enter the base branch:\" \"main\"}}"
-        - "--head"
-        - "{{branch}}"
-        - "--push"
-        - "--no-edit"
-    view:
-      command: "hub browse"
-      args:
-        - "pull/{{id}}"
+    pager: delta --paging=never
 
 # Services Configuration
 services:
   "github.com": "github:github.com"
   "gitlab.com": "gitlab:gitlab.com"
   "bitbucket.org": "bitbucket:bitbucket.org"
-
-# File Tree Settings
-fileTree:
-  enabled: true
-  showHidden: true
-  showIgnored: false
-  showStaged: true
-  showUntracked: true
-
-# Delta Diff Tool Configuration
-delta:
-  syntaxTheme: "base16"
-  lineNumbers: true
-  sideBySide: true
-  navigate: true
-  light: true

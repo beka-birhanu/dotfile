@@ -23,7 +23,7 @@ EOF
   echo "Go project '$PROJECT_NAME' initialized."
 }
 
-setup_servlet_project() {
+setup_servlet() {
   [[ -z "$1" || -z "$2" ]] && { echo "Usage: setup_servlet_project <name> <id>"; return 1; }
   local PROJECT_NAME=$1 PROJECT_ID=$2 PROJECT_DIR="./$PROJECT_NAME"
   mvn archetype:generate -DgroupId=com.example -DartifactId=$PROJECT_NAME \

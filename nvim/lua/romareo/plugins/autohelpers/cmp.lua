@@ -42,18 +42,13 @@ local M = {
 function M.config()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
+	local icons = require("romareo.plugins.ui.icons")
 	require("luasnip/loaders/from_vscode").lazy_load()
 
-	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-	vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
-	vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
+	Vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+	Vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
+	Vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 
-	local check_backspace = function()
-		local col = vim.fn.col(".") - 1
-		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-	end
-
-	local icons = require("romareo.plugins.ui.icons")
 	cmp.setup({
 		snippet = {
 			expand = function(args)
@@ -63,7 +58,6 @@ function M.config()
 		mapping = cmp.mapping.preset.insert({
 			-- Disable <C-y> (stop it from confirming suggestions)
 			["<C-y>"] = cmp.config.disable,
-
 			["<C-k>"] = cmp.mapping.scroll_docs(-4),
 			["<C-j>"] = cmp.mapping.scroll_docs(4),
 			["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
