@@ -9,6 +9,7 @@
     editor = nvim
     autolf = true
     safecrlf = true
+    pager = delta
 
 [alias]
     lg = log --oneline --graph --decorate --all
@@ -16,6 +17,21 @@
 
 [color]
     ui = auto
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    line-numbers = true
+    side-by-side = true
+    dark = true
+    syntax-theme = "Catppuccin Mocha" 
+    navigate = true
+    features = "decorations,side-by-side"
+    minus-style = "pink"   
+    plus-style  = "green"
+    commit      = "cyan"
+    file        = "yellow"
 
 [push]
     default = simple

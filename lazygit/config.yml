@@ -46,7 +46,7 @@ git:
   paging:
     useConfig: true
     colorArg: always
-    pager: delta --paging=never --line-numbers --features=colibri
+    pager: delta --paging=never 
   diff:
     tool: vimdiff
   editor:
