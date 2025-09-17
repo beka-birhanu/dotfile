@@ -1,12 +1,12 @@
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
-mods = "Control|Shift"
+mods = "Command"
 
 [[keyboard.bindings]]
 action = "Copy"
 key = "C"
-mods = "Control|Shift"
+mods = "Command"
 
 [colors.primary]
 background = "0x1e1e2e"
