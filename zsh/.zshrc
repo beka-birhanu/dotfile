@@ -1,3 +1,6 @@
+# Add Homebrew binaries to PATH
+export PATH="/opt/homebrew/bin:$PATH"
+
 # ~/.zshrc
 export PATH=$PATH:$(go env GOPATH)/bin
 

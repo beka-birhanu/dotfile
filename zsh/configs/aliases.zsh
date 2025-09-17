@@ -3,7 +3,7 @@
 # -------------------------
 alias cat='bat --style=plain --pager=never --theme="Catppuccin Mocha"'
 alias ls='ls --color=auto'
-alias sysup='sudo pacman -Syu --noconfirm && yay -Syu --noconfirm'
+alias sysup='brew update && brew upgrade && brew cleanup'
 
 # -------------------------
 # Functions

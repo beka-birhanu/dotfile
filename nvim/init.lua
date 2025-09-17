@@ -35,7 +35,7 @@ spec("romareo.plugins.movement.nvimtree")
 spec("romareo.plugins.movement.fterm")
 spec("romareo.plugins.movement.telescope")
 spec("romareo.plugins.movement.harpoon")
-spec("romareo.plugins.movement.neoscroll")
+-- spec("romareo.plugins.movement.neoscroll")
 
 -- CPH
 spec("romareo.plugins.cph.cph")

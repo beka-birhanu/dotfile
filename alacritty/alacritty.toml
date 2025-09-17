@@ -1,19 +1,19 @@
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
-mods = "Control|Shift"
+mods = "Command"
 
 [[keyboard.bindings]]
 action = "Copy"
 key = "C"
-mods = "Control|Shift"
+mods = "Command"
 
 [colors.primary]
 background = "0x1e1e2e"
 foreground = "0xf2e9e1"
 
 [window]
-opacity = 0.75
+opacity = 0.7
 padding.x = 0
 padding.y = 0
 decorations = "Buttonless"
@@ -23,12 +23,25 @@ option_as_alt = "Both"
 dynamic_title = false
 
 [font]
-normal.family = "JetBrains Mono Nerd Font" # Other options: "FiraCode Nerd Font", "MesloLG Nerd Font"
-size = 11
+normal.family = "JetBrainsMono Nerd Font" # Other options: "FiraCode Nerd Font", "MesloLG Nerd Font"
+size = 15
 
 [terminal.shell]
-program = "/bin/bash"
-args = ["-c", "tmux a || tmux; exec $SHELL"]
+program = "/bin/zsh"
+args = ["-l", "-c", "tmux attach || tmux new"]
 
 [env]
 TERM = "xterm-256color"
+
+[[keyboard.bindings]]
+# Ctrl + →
+key = "Right"
+mods = "Option"
+chars = "\u001b[1;5C"
+
+[[keyboard.bindings]]
+# Ctrl + ←
+key = "Left"
+mods = "Option"
+chars = "\u001b[1;5D"
+
