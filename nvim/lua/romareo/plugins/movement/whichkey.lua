@@ -46,22 +46,22 @@ function M.config()
     mode = "n", -- NORMAL mode
   }
 
-  local mappings = {
-    {
-      { "<leader>c", group = "cph" },
-      { "<leader>t", group = "telescope" },
-      { "<leader>g", group = "git" },
-      { "<leader>l", group = "lsp" },
-      { "<leader>q", "<cmd>confirm q<CR>", desc = "quit" },
-      { "<leader>v", "<cmd>vsplit<CR>",    desc = "vertical split" },
-      { "<leader>h", "<cmd>split<CR>",     desc = "horizontal split" },
-      {
-        "<leader>f",
-        function()
-          local cur_width = Vim.api.nvim_win_get_width(0)
-          local cur_height = Vim.api.nvim_win_get_height(0)
-          local total_width = Vim.o.columns
-          local total_height = Vim.o.lines - Vim.o.cmdheight
+	local mappings = {
+		{
+			{ "<leader>c", group = "cph" },
+			{ "<leader>t", group = "telescope" },
+			{ "<leader>g", group = "git" },
+			{ "<leader>l", group = "lsp" },
+			{ "<leader>q", "<cmd>confirm q<CR>", desc = "quit" },
+			{ "<leader>v", "<cmd>vsplit<CR>", desc = "vertical split" },
+			{ "<leader>b", "<cmd>split<CR>", desc = "horizontal split" },
+			{
+				"<leader>f",
+				function()
+					local cur_width = Vim.api.nvim_win_get_width(0)
+					local cur_height = Vim.api.nvim_win_get_height(0)
+					local total_width = Vim.o.columns
+					local total_height = Vim.o.lines - Vim.o.cmdheight
 
           -- If already maximized in both dimensions → equalize
           if cur_width >= total_width - 5 and cur_height >= total_height - 5 then

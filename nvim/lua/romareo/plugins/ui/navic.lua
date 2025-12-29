@@ -1,6 +1,5 @@
 local M = {
-  "SmiteshP/nvim-navic",
-  event = "BufReadPost",
+	"SmiteshP/nvim-navic",
 }
 
 function M.config()
