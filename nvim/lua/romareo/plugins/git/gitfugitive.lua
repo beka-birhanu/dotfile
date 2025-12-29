@@ -1,5 +1,6 @@
 local M = {
-	"tpope/vim-fugitive",
+  "tpope/vim-fugitive",
+  event = "VeryLazy",
 }
 
 function M.config() end

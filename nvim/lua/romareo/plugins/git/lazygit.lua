@@ -1,14 +1,15 @@
 local M = {
-	"kdheepak/lazygit.nvim",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-	},
+  "kdheepak/lazygit.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+  event = "VeryLazy",
 }
 
 function M.config()
-	local keymap = Vim.keymap -- for conciseness
+  local keymap = Vim.keymap                                                     -- for conciseness
 
-	keymap.set("n", "<leader>gl", "<cmd>LazyGit<CR>", { desc = "Toggle LazyGit" }) -- toggle lazy git
+  keymap.set("n", "<leader>gl", "<cmd>LazyGit<CR>", { desc = "Toggle LazyGit" }) -- toggle lazy git
 end
 
 return M
