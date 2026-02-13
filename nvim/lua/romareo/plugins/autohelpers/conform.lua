@@ -11,6 +11,7 @@ FORMATTERS = {
 	"goimports",
 	"gofumpt",
 	"autopep8",
+  "clang-format",
 }
 
 M.config = function()
@@ -33,6 +34,8 @@ M.config = function()
 			lua = { "stylua" },
 			python = { "autopep8" },
 			go = { "goimports", "gofumpt" },
+      cpp = { "clang-format" },
+      c = { "clang-format" },
 		},
 
 		format_after_save = {
