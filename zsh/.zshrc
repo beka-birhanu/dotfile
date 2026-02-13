@@ -8,3 +8,4 @@ for file in ~/dotfile/zsh/configs/*.zsh; do
   [ -r "$file" ] && source "$file"
 done
 
+export PATH="$HOME/.local/bin:$PATH"
