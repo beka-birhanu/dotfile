@@ -34,13 +34,11 @@ gui:
       - "#9399b2" # overlay2
     searchingActiveBorderColor:
       - "#f38ba8" # pink accent for search
-
 # Git Settings
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
 # Services Configuration
 services:
   "github.com": "github:github.com"
