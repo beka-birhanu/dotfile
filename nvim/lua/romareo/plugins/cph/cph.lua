@@ -1,7 +1,7 @@
 local M = {
 	"xeluxee/competitest.nvim",
 	dependencies = "MunifTanjim/nui.nvim",
-	event = "VeryLazy",
+	cmd = "CompetiTest",
 }
 
 function M.config()

@@ -1,7 +1,7 @@
 local M = {
 	"MeanderingProgrammer/markdown.nvim",
 	name = "render-markdown", -- for some reason this is required
-	event = "VeryLazy",
+	ft = "markdown",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter", -- Mandatory
 		"nvim-tree/nvim-web-devicons", -- Optional but recommended

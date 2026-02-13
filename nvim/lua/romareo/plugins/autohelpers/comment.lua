@@ -1,6 +1,6 @@
 local M = {
   "numToStr/Comment.nvim",
-  lazy = false,
+  keys = { "<leader>/" },
   dependencies = {
     {
       "JoosepAlviste/nvim-ts-context-commentstring",

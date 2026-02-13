@@ -12,7 +12,6 @@ local M = {
     },
   },
   cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
-  event = "VeryLazy",
 }
 
 return M

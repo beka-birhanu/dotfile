@@ -1,6 +1,6 @@
 local M = {
   "numToStr/FTerm.nvim",
-  event = "VeryLazy",
+  keys = { "<A-f>" },
 }
 
 function M.config()

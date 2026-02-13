@@ -5,7 +5,7 @@ local M = {
       "folke/neodev.nvim",
     },
   },
-  lazy = false,
+  event = "BufReadPre",
 }
 
 LSP_SERVERS = {

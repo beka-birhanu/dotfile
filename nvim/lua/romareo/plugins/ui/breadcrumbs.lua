@@ -1,5 +1,6 @@
 local M = {
 	"LunarVim/breadcrumbs.nvim",
+	event = "BufReadPost",
 }
 
 function M.config()
