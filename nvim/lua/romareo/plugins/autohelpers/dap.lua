@@ -6,7 +6,15 @@ local M = {
     "nvim-neotest/nvim-nio",
   },
   lazy = true,
-  event = "InsertEnter",
+  keys = {
+    { "<Leader>dc", desc = "Dap continue" },
+    { "<Leader>db", desc = "Dap toggle breakpoint" },
+    { "<Leader>do", desc = "Dap step over" },
+    { "<Leader>di", desc = "Dap step into" },
+    { "<Leader>da", desc = "Dap step out" },
+    { "<Leader>dr", desc = "Dap repl" },
+    { "<Leader>dl", desc = "Dap run last" },
+  },
 }
 
 M.config = function()

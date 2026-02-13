@@ -3,6 +3,8 @@ local M = {
 	dependencies = {
 		"williamboman/mason.nvim",
 	},
+	cmd = "Mason",
+	event = "VimEnter",
 }
 
 function M.config()

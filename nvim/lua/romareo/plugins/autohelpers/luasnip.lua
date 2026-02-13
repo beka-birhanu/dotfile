@@ -3,6 +3,7 @@ local M = {
   version = "v2.*",
   build = "make install_jsregexp", -- install jsregexp (optional!).
   lazy = true,
+  event = "InsertEnter",
 }
 
 M.config = function()

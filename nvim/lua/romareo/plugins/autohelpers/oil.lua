@@ -1,5 +1,6 @@
 local M = {
   "stevearc/oil.nvim",
+  keys = { "-" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
