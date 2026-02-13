@@ -10,11 +10,11 @@ after-startup-command = [
         end tell'
        ''',
 
-    '''exec-and-forget osascript -e '
-        tell application "WhatsApp"
-            activate
-        end tell'
-       ''',
+    # '''exec-and-forget osascript -e '
+    #     tell application "WhatsApp"
+    #         activate
+    #     end tell'
+    #    ''',
 
     '''exec-and-forget osascript -e '
         tell application "Alacritty"
@@ -22,8 +22,13 @@ after-startup-command = [
         end tell'
        ''',
 
-    'exec-and-forget borders active_color=0xff89b4fa inactive_color=0xff7f849c width=3.0'
+    # '''exec-and-forget osascript -e '
+    #     tell application "Telegram"
+    #         activate
+    #     end tell'
+    #    ''',
 
+    'exec-and-forget borders active_color=0xff89b4fa inactive_color=0xff7f849c width=3.0'
 ]
 
 # Start AeroSpace at login
@@ -90,8 +95,6 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-id = 'net.whatsapp.WhatsApp'
     run = 'move-node-to-workspace 9'
-
-
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -177,8 +180,6 @@ automatically-unhide-macos-hidden-apps = false
 
     cmd-backspace = "exec-and-forget osascript -e 'tell application \"System Events\" to shut down'"
     cmd-shift-backspace = "exec-and-forget osascript -e 'tell application \"System Events\" to restart'"
-
-    cmd-m = "exec-and-forget search"
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     cmd-shift-semicolon = 'mode service'
