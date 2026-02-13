@@ -1,6 +1,6 @@
 local M = {
 	"m4xshen/autoclose.nvim",
-	event = { "InsertEnter", "CmdlineEnter" },
+	event = { "InsertEnter" },
 }
 
 function M.config()
