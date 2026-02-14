@@ -25,6 +25,7 @@ LSP_SERVERS = {
   "yamlls",
   "rust_analyzer",
   "clangd",
+  "ltex",
 }
 
 M.on_attach = function(_, bufnr)
