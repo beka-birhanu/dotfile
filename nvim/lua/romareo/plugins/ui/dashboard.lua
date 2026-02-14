@@ -1,12 +1,18 @@
 return {
   "beka-birhanu/dashboard-nvim",
   lazy = true,
-  event = "VimEnter",
+  event = "UIEnter",
   config = function()
     require("dashboard").setup({
       config = {
         week_header = {
           enable = true,
+        },
+        project = { 
+          enable = false
+        },
+        mru = {
+          enable = false,
         },
       },
     })
