@@ -68,7 +68,7 @@ install_common_packages() {
       tree \
       lazygit \
       delta \
-      oathtool \
+      oath-toolkit \
       ripgrep
   fi
 }
@@ -81,6 +81,7 @@ install_macos_packages() {
   brew install --cask alacritty || true
   brew tap nikitabobko/tap || true
   brew install --cask aerospace || true
+  brew install --cask karabiner-elements || true
 }
 
 setup_tmux_plugins() {
@@ -88,6 +89,18 @@ setup_tmux_plugins() {
   if [ ! -d "$tpm_dir" ]; then
     log "Installing tmux plugin manager (tpm)"
     git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+  fi
+}
+
+setup_karabiner() {
+  # Main karabiner.json
+  if [ -f "$SCRIPT_DIR/karabiner/karabiner.json" ]; then
+    link "$SCRIPT_DIR/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
+  fi
+
+  # Complex modifications directory (optional)
+  if [ -d "$SCRIPT_DIR/karabiner/assets/complex_modifications" ]; then
+    link "$SCRIPT_DIR/karabiner/assets/complex_modifications" "$HOME/.config/karabiner/assets/complex_modifications"
   fi
 }
 
@@ -142,6 +155,7 @@ main() {
 
   setup_symlinks
   setup_tmux_plugins
+  setup_karabiner
 
   log "Done. You may need to restart your shell and tmux."
 }
