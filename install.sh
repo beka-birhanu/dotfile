@@ -67,9 +67,10 @@ install_common_packages() {
       bat \
       tree \
       lazygit \
-      delta \
+      git-delta \
       oath-toolkit \
-      ripgrep
+      ripgrep \
+      brave-browser 
   fi
 }
 
@@ -82,7 +83,6 @@ install_macos_packages() {
   brew tap nikitabobko/tap || true
   brew install --cask aerospace || true
   brew install --cask karabiner-elements || true
-  brew tap homebrew/cask-fonts || true
   brew install --cask font-jetbrains-mono-nerd-font || true
 }
 
@@ -95,76 +95,52 @@ setup_tmux_plugins() {
 }
 
 setup_karabiner() {
-  # Main karabiner.json
   if [ -f "$SCRIPT_DIR/karabiner/karabiner.json" ]; then
     link "$SCRIPT_DIR/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
   fi
 
-  # Complex modifications directory (optional)
   if [ -d "$SCRIPT_DIR/karabiner/assets/complex_modifications" ]; then
     link "$SCRIPT_DIR/karabiner/assets/complex_modifications" "$HOME/.config/karabiner/assets/complex_modifications"
   fi
 }
 
 setup_bat_theme() {
-  # Install Catppuccin Mocha theme for bat, matching aliases
   if ! command -v bat >/dev/null 2>&1; then
     return
   fi
 
-  local bat_theme_dir="$HOME/.config/bat/themes"
+  local bat_config_dir
+  bat_config_dir=$(bat --config-dir)
+  local bat_theme_dir="$bat_config_dir/themes"
   mkdir -p "$bat_theme_dir"
 
-  local theme_url="https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin-mocha.tmTheme"
+  # Updated URL and Case-sensitive filename
+  local theme_url="https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme"
   local theme_path="$bat_theme_dir/Catppuccin-mocha.tmTheme"
 
   if [ ! -f "$theme_path" ]; then
     log "Installing Catppuccin Mocha theme for bat"
-    curl -fsSL "$theme_url" -o "$theme_path" || log "Failed to download bat theme (Catppuccin Mocha)"
-    bat cache --build >/dev/null 2>&1 || true
+    if curl -fsSL "$theme_url" -o "$theme_path"; then
+      log "Rebuilding bat cache..."
+      bat cache --build >/dev/null 2>&1 || true
+    else
+      log "Failed to download bat theme (Catppuccin Mocha)"
+    fi
   fi
 }
 
 setup_symlinks() {
   log "Setting up symlinks"
 
-  # Zsh
   link "$SCRIPT_DIR/zsh/.zshrc" "$HOME/.zshrc"
 
-  # Git
-  if [ -f "$SCRIPT_DIR/git/.gitconfig" ]; then
-    link "$SCRIPT_DIR/git/.gitconfig" "$HOME/.gitconfig"
-  fi
-
-  # Lazygit
-  if [ -f "$SCRIPT_DIR/lazygit/config.yml" ]; then
-    link "$SCRIPT_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
-  fi
-
-  # Neovim
-  if [ -d "$SCRIPT_DIR/nvim" ]; then
-    link "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
-  fi
-
-  # Tmux
-  if [ -f "$SCRIPT_DIR/tmux/tmux.conf" ]; then
-    link "$SCRIPT_DIR/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
-  fi
-
-  # Alacritty
-  if [ -f "$SCRIPT_DIR/alacritty/alacritty.toml" ]; then
-    link "$SCRIPT_DIR/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
-  fi
-
-  # AeroSpace
-  if [ -f "$SCRIPT_DIR/aerospace/aerospace.toml" ]; then
-    link "$SCRIPT_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
-  fi
-
-  # LS_COLORS (Catppuccin-converted)
-  if [ -f "$SCRIPT_DIR/zsh/LS_COLORS" ]; then
-    link "$SCRIPT_DIR/zsh/LS_COLORS" "$HOME/.config/LS_COLORS"
-  fi
+  [ -f "$SCRIPT_DIR/git/.gitconfig" ] && link "$SCRIPT_DIR/git/.gitconfig" "$HOME/.gitconfig"
+  [ -f "$SCRIPT_DIR/lazygit/config.yml" ] && link "$SCRIPT_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
+  [ -d "$SCRIPT_DIR/nvim" ] && link "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
+  [ -f "$SCRIPT_DIR/tmux/tmux.conf" ] && link "$SCRIPT_DIR/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+  [ -f "$SCRIPT_DIR/alacritty/alacritty.toml" ] && link "$SCRIPT_DIR/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+  [ -f "$SCRIPT_DIR/aerospace/aerospace.toml" ] && link "$SCRIPT_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
+  [ -f "$SCRIPT_DIR/zsh/LS_COLORS" ] && link "$SCRIPT_DIR/zsh/LS_COLORS" "$HOME/.config/LS_COLORS"
 }
 
 main() {
@@ -176,9 +152,7 @@ main() {
   fi
 
   install_common_packages
-
   install_macos_packages
-
   setup_symlinks
   setup_tmux_plugins
   setup_karabiner
@@ -188,4 +162,3 @@ main() {
 }
 
 main "$@"
-
