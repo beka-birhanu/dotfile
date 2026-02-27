@@ -82,6 +82,8 @@ install_macos_packages() {
   brew tap nikitabobko/tap || true
   brew install --cask aerospace || true
   brew install --cask karabiner-elements || true
+  brew tap homebrew/cask-fonts || true
+  brew install --cask font-jetbrains-mono-nerd-font || true
 }
 
 setup_tmux_plugins() {
