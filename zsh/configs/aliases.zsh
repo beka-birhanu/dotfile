@@ -3,6 +3,7 @@
 # -------------------------
 alias cat='bat --theme="Catppuccin Mocha"'
 alias ls='ls --color=auto'
+alias sysup='sudo pacman -Syu --noconfirm && yay -Syu --noconfirm'
 
 # -------------------------
 # Functions
