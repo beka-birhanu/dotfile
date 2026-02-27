@@ -1,7 +1,7 @@
 # -------------------------
 # Aliases
 # -------------------------
-alias cat='bat --style=plain --pager=never --theme="Catppuccin Mocha"'
+alias cat='bat --theme="Catppuccin Mocha"'
 alias ls='ls --color=auto'
 alias sysup='brew update && brew upgrade && brew cleanup'
 
