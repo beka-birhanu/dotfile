@@ -106,6 +106,25 @@ setup_karabiner() {
   fi
 }
 
+setup_bat_theme() {
+  # Install Catppuccin Mocha theme for bat, matching aliases
+  if ! command -v bat >/dev/null 2>&1; then
+    return
+  fi
+
+  local bat_theme_dir="$HOME/.config/bat/themes"
+  mkdir -p "$bat_theme_dir"
+
+  local theme_url="https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin-mocha.tmTheme"
+  local theme_path="$bat_theme_dir/Catppuccin-mocha.tmTheme"
+
+  if [ ! -f "$theme_path" ]; then
+    log "Installing Catppuccin Mocha theme for bat"
+    curl -fsSL "$theme_url" -o "$theme_path" || log "Failed to download bat theme (Catppuccin Mocha)"
+    bat cache --build >/dev/null 2>&1 || true
+  fi
+}
+
 setup_symlinks() {
   log "Setting up symlinks"
 
@@ -141,6 +160,11 @@ setup_symlinks() {
   if [ -f "$SCRIPT_DIR/aerospace/aerospace.toml" ]; then
     link "$SCRIPT_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
   fi
+
+  # LS_COLORS (Catppuccin-converted)
+  if [ -f "$SCRIPT_DIR/zsh/LS_COLORS" ]; then
+    link "$SCRIPT_DIR/zsh/LS_COLORS" "$HOME/.config/LS_COLORS"
+  fi
 }
 
 main() {
@@ -158,6 +182,7 @@ main() {
   setup_symlinks
   setup_tmux_plugins
   setup_karabiner
+  setup_bat_theme
 
   log "Done. You may need to restart your shell and tmux."
 }
