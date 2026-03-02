@@ -24,4 +24,4 @@ This repository contains my dotfiles for shell, Neovim, tmux, terminal, and wind
     - Zsh `sysup` alias using `pacman`/`yay` for system updates.
   - Use this branch on Arch/i3 machines and for changing Arch-specific behavior.
 
-his model keeps `master` clean and portable, while `macOS` and `arch` carry only the extra config needed for each platform.
+This model keeps `master` clean and portable, while `macOS` and `arch` carry only the extra config needed for each platform.
