@@ -54,7 +54,7 @@ function M.config()
       { "<leader>l", group = "lsp" },
       { "<leader>q", "<cmd>confirm q<CR>", desc = "quit" },
       { "<leader>v", "<cmd>vsplit<CR>",    desc = "vertical split" },
-      { "<leader>b", "<cmd>split<CR>",     desc = "horizontal split" },
+      { "<leader>h", "<cmd>split<CR>",     desc = "horizontal split" },
       {
         "<leader>f",
         function()
