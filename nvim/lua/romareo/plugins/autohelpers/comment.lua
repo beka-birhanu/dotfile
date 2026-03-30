@@ -3,12 +3,6 @@ local M = {
   keys = {
     { "<leader>/", mode = { "n", "v" }, desc = "Comment" },
   },
-  dependencies = {
-    {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      event = "VeryLazy",
-    },
-  },
 }
 
 function M.config()
@@ -16,16 +10,6 @@ function M.config()
   wk.add({
     { "<leader>/", "<Plug>(comment_toggle_linewise_current)", desc = "Comment" },
     { "<leader>/", "<Plug>(comment_toggle_linewise_visual)",  mode = "v",      desc = "Comment" },
-  })
-
-  Vim.g.skip_ts_context_commentstring_module = true
-  ---@diagnostic disable: missing-fields
-  require("ts_context_commentstring").setup({
-    enable_autocmd = false,
-  })
-
-  require("Comment").setup({
-    pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
   })
 end
 
