@@ -178,8 +178,8 @@ automatically-unhide-macos-hidden-apps = false
     cmd-space = 'layout horizontal vertical'
     cmd-shift-space = 'layout floating tiling'
 
-    cmd-backspace = "exec-and-forget osascript -e 'tell application \"System Events\" to shut down'"
-    cmd-shift-backspace = "exec-and-forget osascript -e 'tell application \"System Events\" to restart'"
+    cmd-ctrl-backspace = "exec-and-forget osascript -e 'tell application \"System Events\" to shut down'"
+    cmd-ctrl-shift-backspace = "exec-and-forget osascript -e 'tell application \"System Events\" to restart'"
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     cmd-shift-semicolon = 'mode service'
