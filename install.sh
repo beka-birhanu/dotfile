@@ -159,6 +159,8 @@ main() {
   setup_bat_theme
 
   log "Done. You may need to restart your shell and tmux."
+  log "If you face issues with tree-sittter specially \"no such file or directory (cmd):'tree-sitter'\" run brew install tree-sitter-cli"
+  log "If not it looks like they have fixed the issue and started distrubuting the pre-built binaries"
 }
 
 main "$@"
