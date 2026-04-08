@@ -100,9 +100,17 @@ function M.config()
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
   end
 
-  Vim.lsp.handlers["textDocument/hover"] = Vim.lsp.with(Vim.lsp.handlers.hover, { border = "rounded" })
-  Vim.lsp.handlers["textDocument/signatureHelp"] =
-      Vim.lsp.with(Vim.lsp.handlers.signature_help, { border = "rounded" })
+  Vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
+    config = config or {}
+    config.border = "rounded"
+    return Vim.lsp.handlers.hover(err, result, ctx, config)
+  end
+
+  Vim.lsp.handlers["textDocument/signatureHelp"] = function(err, result, ctx, config)
+    config = config or {}
+    config.border = "rounded"
+    return Vim.lsp.handlers.signature_help(err, result, ctx, config)
+  end
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
   -- 3. Setup which-key keybindings
@@ -115,20 +123,19 @@ function M.config()
   })
 
   -- 4. Setup each LSP server
-  for _, server in pairs(servers) do
-    local opts = {
-      on_attach = M.on_attach,
-      capabilities = M.common_capabilities(),
-    }
+  Vim.lsp.config("*", {
+    on_attach = M.on_attach,
+    capabilities = M.common_capabilities(),
+  })
 
+  for _, server in pairs(servers) do
     local require_ok, settings = pcall(require, "romareo.plugins.autohelpers.lspsettings." .. server)
     if require_ok then
-      opts = Vim.tbl_deep_extend("force", settings, opts)
+      Vim.lsp.config(server, settings)
     end
-
-    Vim.lsp.config(server, opts)
-    Vim.lsp.enable(server)
   end
+
+  Vim.lsp.enable(servers)
 end
 
 return M
