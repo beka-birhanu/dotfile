@@ -26,6 +26,7 @@ LSP_SERVERS = {
   "rust_analyzer",
   "clangd",
   "ltex",
+  "postgres_lsp",
 }
 
 M.on_attach = function(_, bufnr)
@@ -115,11 +116,11 @@ function M.config()
 
   -- 3. Setup which-key keybindings
   wk.add({
-    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",  desc = "Code Action" },
-    { "<leader>li", "<cmd>LspInfo<cr>",                        desc = "Info" },
-    { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
-    { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
-    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",       desc = "Rename" },
+    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",         desc = "Code Action" },
+    { "<leader>li", "<cmd>checkhealth lsp<cr>",                       desc = "LSP Health" },
+    { "<leader>lj", "<cmd>lua vim.diagnostic.jump({count = 1})<cr>",  desc = "Next Diagnostic" },
+    { "<leader>lk", "<cmd>lua vim.diagnostic.jump({count = -1})<cr>", desc = "Prev Diagnostic" },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",              desc = "Rename" },
   })
 
   -- 4. Setup each LSP server
