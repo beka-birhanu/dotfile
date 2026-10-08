@@ -34,7 +34,7 @@ link() {
   fi
 
   log "Linking $dst -> $src"
-  ln -s "$src" "$dst"
+  ln -sfn "$src" "$dst"
 }
 
 ensure_pacman() {
@@ -48,8 +48,16 @@ install_arch_packages() {
   ensure_pacman
 
   log "Installing base tools with pacman"
-  sudo pacman -Syu --needed \
+  sudo pacman -Syu --needed --noconfirm \
+    base-devel \
     git \
+    git-delta \
+    curl \
+    unzip \
+    go \
+    nodejs \
+    npm \
+    tree-sitter-cli \
     zsh \
     neovim \
     tmux \
@@ -59,6 +67,7 @@ install_arch_packages() {
     tree \
     lazygit \
     ripgrep \
+    alacritty \
     i3-wm \
     i3status \
     picom \
@@ -68,11 +77,55 @@ install_arch_packages() {
     network-manager-applet \
     ttf-jetbrains-mono-nerd
 
+  ensure_yay
+
+  log "Installing optional AUR packages with yay"
+  yay -S --needed --noconfirm \
+    brave-bin \
+    telegram-desktop || log "Some AUR packages failed to install"
+}
+
+ensure_yay() {
   if command -v yay >/dev/null 2>&1; then
-    log "Installing optional AUR packages with yay"
-    yay -S --needed \
-      brave-bin \
-      telegram-desktop || true
+    return
+  fi
+
+  log "yay not found – building yay-bin from the AUR"
+  local build_dir
+  build_dir="$(mktemp -d)"
+  git clone https://aur.archlinux.org/yay-bin.git "$build_dir/yay-bin"
+  (cd "$build_dir/yay-bin" && makepkg -si --noconfirm)
+  rm -rf "$build_dir"
+}
+
+setup_default_shell() {
+  local zsh_path
+  zsh_path="$(command -v zsh)"
+  if [ "$(getent passwd "$(id -un)" | cut -d: -f7)" != "$zsh_path" ]; then
+    log "Setting default shell to $zsh_path"
+    sudo chsh -s "$zsh_path" "$(id -un)"
+  fi
+}
+
+setup_bat_theme() {
+  if ! command -v bat >/dev/null 2>&1; then
+    return
+  fi
+
+  local bat_theme_dir
+  bat_theme_dir="$(bat --config-dir)/themes"
+  mkdir -p "$bat_theme_dir"
+
+  local theme_url="https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme"
+  local theme_path="$bat_theme_dir/Catppuccin Mocha.tmTheme"
+
+  if [ ! -f "$theme_path" ]; then
+    log "Installing Catppuccin Mocha theme for bat"
+    if curl -fsSL "$theme_url" -o "$theme_path"; then
+      bat cache --build >/dev/null 2>&1 || true
+    else
+      log "Failed to download bat theme (Catppuccin Mocha)"
+    fi
   fi
 }
 
@@ -123,6 +176,11 @@ setup_symlinks() {
     link "$SCRIPT_DIR/i3status/config" "$HOME/.config/i3status/config"
   fi
 
+  # Picom
+  if [ -f "$SCRIPT_DIR/picom/picom.conf" ]; then
+    link "$SCRIPT_DIR/picom/picom.conf" "$HOME/.config/picom/picom.conf"
+  fi
+
   # LS_COLORS (Catppuccin-converted)
   if [ -f "$SCRIPT_DIR/zsh/LS_COLORS" ]; then
     link "$SCRIPT_DIR/zsh/LS_COLORS" "$HOME/.config/LS_COLORS"
@@ -140,6 +198,8 @@ main() {
   install_arch_packages
   setup_symlinks
   setup_tmux_plugins
+  setup_bat_theme
+  setup_default_shell
 
   log "Done. You may need to restart your shell, tmux, and i3."
 }
