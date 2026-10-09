@@ -35,6 +35,7 @@ Vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would sh
 Vim.opt.wrap = false -- display lines as one long line
 Vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor
 Vim.opt.sidescrolloff = 8 -- minimal number of screen columns to keep to the left and right of the cursor
+Vim.opt.sidescroll = 1 -- scroll horizontally one column at a time instead of jumping half a screen
 Vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 Vim.opt.title = false -- disable title
 -- colorcolumn = "80",

@@ -36,9 +36,9 @@ gui:
       - "#f38ba8" # pink accent for search
 # Git Settings
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never
+      command: delta --paging=never
 # Services Configuration
 services:
   "github.com": "github:github.com"

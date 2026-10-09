@@ -29,7 +29,20 @@ Vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
 		-- Enable line wrapping and spell checking in these file types
 		Vim.opt_local.wrap = true
+		Vim.opt_local.linebreak = true -- wrap at word boundaries
+		Vim.opt_local.breakindent = true -- keep indent on wrapped list items
 		Vim.opt_local.spell = true
+	end,
+})
+
+-- Markdown: no wrap so wide tables / code blocks scroll horizontally instead of breaking
+Vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "markdown" },
+	callback = function(ev)
+		Vim.opt_local.wrap = false
+		Vim.keymap.set("n", "<leader>W", function()
+			Vim.opt_local.wrap = not Vim.opt_local.wrap:get()
+		end, { buffer = ev.buf, desc = "Toggle wrap" })
 	end,
 })
 
