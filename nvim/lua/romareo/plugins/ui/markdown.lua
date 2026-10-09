@@ -9,36 +9,45 @@ local M = {
 	},
 }
 
-function M.config()
+local function set_highlights()
 	local colors = require("catppuccin.palettes").get_palette("mocha")
+	local hl = function(name, opts)
+		Vim.api.nvim_set_hl(0, "RenderMarkdown" .. name, opts)
+	end
 
+	hl("H1", { fg = colors.lavender, bold = true })
+	hl("H2", { fg = colors.mauve, bold = true })
+	hl("H3", { fg = colors.pink, bold = true })
+	hl("H4", { fg = colors.flamingo, bold = true })
+	hl("H5", { fg = colors.peach, bold = true })
+	hl("H6", { fg = colors.yellow, bold = true })
+	hl("Code", { bg = colors.crust })
+	hl("CodeBorder", { bg = colors.surface0 })
+	hl("CodeInline", { fg = colors.text, bg = colors.crust })
+	hl("Quote", { fg = colors.rosewater, italic = true })
+	hl("Bullet", { fg = colors.sky })
+	hl("Link", { fg = colors.teal, underline = true })
+end
+
+function M.config()
 	require("render-markdown").setup({
 		heading = {
-			h1 = { fg = colors.lavender, bold = true },
-			h2 = { fg = colors.mauve, bold = true },
-			h3 = { fg = colors.pink, bold = true },
-			h4 = { fg = colors.flamingo, bold = true },
-			h5 = { fg = colors.peach, bold = true },
-			h6 = { fg = colors.yellow, bold = true },
 			backgrounds = {},
 		},
 		code = {
-			bg = colors.crust,
-			fg = colors.text,
-			border = colors.surface0,
+			-- size code blocks to content instead of stretching to window edge
+			width = "block",
+			left_pad = 1,
+			right_pad = 1,
 		},
-		quote = {
-			fg = colors.rosewater,
-			italic = true,
-		},
-		list = {
-			fg = colors.sky,
-		},
-		link = {
-			fg = colors.teal,
-			underline = true,
+		pipe_table = {
+			preset = "round",
 		},
 	})
+
+	set_highlights()
+	-- colorscheme changes clear custom highlights, so reapply them
+	Vim.api.nvim_create_autocmd("ColorScheme", { callback = set_highlights })
 end
 
 return M
