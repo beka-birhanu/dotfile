@@ -13,10 +13,13 @@ local langs = {
   "python",
   "typescript",
   "go",
+  "gomod",
+  "gosum",
   "rust",
   "yaml",
   "javascript",
   "dockerfile",
+  "sql",
 }
 
 function M.config()
