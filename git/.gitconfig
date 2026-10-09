@@ -23,12 +23,12 @@
 
 [delta]
     line-numbers = true
-    side-by-side = true
+    side-by-side = false
     dark = true
-    syntax-theme = "Catppuccin Mocha" 
+    syntax-theme = "Catppuccin Mocha"
     navigate = true
-    features = "decorations,side-by-side"
-    minus-style = "pink"   
+    features = "decorations"
+    minus-style = "pink"
     plus-style  = "green"
     commit      = "cyan"
     file        = "yellow"
@@ -55,3 +55,5 @@
 [url "git@github.com:"]
     pushInsteadOf = https://github.com/
 
+[url "git@gitlab.com:"]
+    pushInsteadOf = https://gitlab.com/
