@@ -39,13 +39,28 @@ install_arch_packages() {
     lazygit \
     ripgrep \
     alacritty \
+    xorg-server \
+    xorg-xinit \
+    xorg-xrandr \
+    lightdm \
+    lightdm-gtk-greeter \
     i3-wm \
     i3status \
+    i3lock \
+    dmenu \
     picom \
     scrot \
     xclip \
     feh \
+    brightnessctl \
+    pipewire \
+    pipewire-pulse \
+    wireplumber \
+    libpulse \
+    networkmanager \
     network-manager-applet \
+    noto-fonts \
+    noto-fonts-emoji \
     ttf-jetbrains-mono-nerd
 
   ensure_yay
@@ -78,12 +93,24 @@ setup_default_shell() {
   fi
 }
 
+setup_arch_services() {
+  log "Enabling system services"
+  sudo systemctl enable NetworkManager.service
+  sudo systemctl enable lightdm.service
+}
+
+setup_user_dirs() {
+  # i3 screenshot bindings write here
+  mkdir -p "$HOME/Pictures/Screenshots"
+}
+
 setup_arch_symlinks() {
   log "Setting up Arch symlinks"
 
   link_if_exists "$SCRIPT_DIR/i3/config" "$HOME/.config/i3/config"
   link_if_exists "$SCRIPT_DIR/i3status/config" "$HOME/.config/i3status/config"
   link_if_exists "$SCRIPT_DIR/picom/picom.conf" "$HOME/.config/picom/picom.conf"
+  link_if_exists "$SCRIPT_DIR/wallpaper/wallpaper.png" "$HOME/Pictures/wallpaper.png"
 }
 
 main() {
@@ -100,8 +127,10 @@ main() {
   setup_tmux_plugins
   setup_bat_theme
   setup_default_shell
+  setup_arch_services
+  setup_user_dirs
 
-  log "Done. You may need to restart your shell, tmux, and i3."
+  log "Done. Reboot to log in to i3 through LightDM."
 }
 
 main "$@"
